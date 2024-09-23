@@ -22,7 +22,7 @@ const Banner: React.FC = () => {
         {/* Left */}
         <div className="md:basis-2/4 basis-full">
           <div className="text-left">
-            <h1 className="xl:text-6xl lg:text-5xl md:text-4xl text-3xl font-bold tracking-tight text-primary">
+            <h1 className="xl:text-6xl lg:text-5xl md:text-4xl text-3xl font-bold tracking-tight text-primary-dark">
               Digital art and collectibles
             </h1>
             <p className="mt-6 text-lg leading-8 text-primary font-light xl:pr-20 lg:pr-16 pr-0">

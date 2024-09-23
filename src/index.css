@@ -77,7 +77,7 @@ html {
   overflow: hidden;
   overflow-y: auto;
   scroll-behavior: smooth;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 body {
@@ -87,4 +87,27 @@ body {
   margin: 0;
   height: 100%;
   background-color: var(--secondary);
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.counter {
+  background: rgb(30, 63, 63);
+  background: linear-gradient(
+    35deg,
+    rgba(30, 63, 63, 1) 0%,
+    rgba(30, 63, 63, 1) 0%,
+    rgba(45, 88, 88, 1) 24%,
+    rgba(21, 45, 45, 1) 42%,
+    rgba(45, 88, 88, 1) 61%,
+    rgba(21, 45, 45, 1) 80%,
+    rgba(64, 128, 128, 1) 100%
+  );
 }

@@ -4,6 +4,7 @@ import React from 'react';
 import Header from '../components/header/header';
 import Banner from '../components/banner/banner';
 import RoadMap from '../components/roadmap/roadmap';
+import RewardCounter from '../components/reward-counter/reward-counter';
 
 const Homepage: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const Homepage: React.FC = () => {
       <Header />
       <Banner />
       <RoadMap />
+      <RewardCounter />
     </div>
   );
 };
