@@ -9,9 +9,9 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigation = [
-    { name: "Roadmap", href: "/#roadmap" }, // These will still use ID references for scrolling
-    { name: "Rewards", href: "/#rewards" },
-    { name: "Contact", href: "/contact" }, // Full path for Contact
+    { name: "Roadmap", href: "#roadmap" },
+    { name: "Rewards", href: "#rewards" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const handleScrollToSection = (href: string) => {
