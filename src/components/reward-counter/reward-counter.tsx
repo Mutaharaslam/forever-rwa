@@ -23,7 +23,7 @@ const RewardCounter: React.FC = () => {
   }, [targetReward, duration]);
   return (
     <section
-      id="roadmap"
+      id="rewards"
       className="container py-24 flex flex-col justify-start items-center"
     >
       <h1 className="text-center xl:text-6xl lg:text-5xl md:text-4xl text-3xl font-semibold text-primary-dark mb-4">
