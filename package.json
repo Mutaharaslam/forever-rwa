@@ -1,6 +1,6 @@
 {
-  "name": "forever",
-  "version": "0.1.0",
+  "name": "forever-rwa",
+  "version": "0.1.1",
   "private": true,
   "homepage": "https://Mutaharaslam.github.io/forever-rwa",
   "dependencies": {
@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-     "predeploy": "npm run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "autoprefixer": "^10.4.20",
     "gh-pages": "^6.1.1",
     "postcss": "^8.4.47",

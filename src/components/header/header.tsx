@@ -12,7 +12,7 @@ const Header: React.FC = () => {
     { name: "Creators", href: "/", external: false },
   ];
   return (
-    <header className="bg-[#f3f2dc] text-white  container mx-auto mt-12 rounded-lg shadow-md">
+    <header className="bg-[#f3f2dc] text-white  container mx-auto mt-12 rounded-lg shadow-md relative z-50">
       <nav
         className="relative mx-auto flex py-5 px-6 items-center justify-between"
         aria-label="Global"

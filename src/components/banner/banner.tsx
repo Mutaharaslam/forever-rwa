@@ -24,7 +24,7 @@ const Banner: React.FC = () => {
           <div className="hidden sm:mb-8 sm:flex sm:justify-start">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-darkGrey  ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Announcing our next round of Give Aways.{" "}
-              <a href="#" className="font-semibold text-primary">
+              <a href="/" className="font-semibold text-primary">
                 <span aria-hidden="true" className="absolute inset-0" />
                 Learn More <span aria-hidden="true">&rarr;</span>
               </a>
@@ -43,13 +43,13 @@ const Banner: React.FC = () => {
             </p>
             <div className="mt-10 flex items-center justify-start gap-x-6">
               <a
-                href="#"
+                href="/"
                 className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Connect Wallet
               </a>
               <a
-                href="#"
+                href="/"
                 className="text-sm font-semibold leading-6 text-primary"
               >
                 Learn more <span aria-hidden="true">→</span>
