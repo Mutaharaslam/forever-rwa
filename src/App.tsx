@@ -4,7 +4,7 @@ import Homepage from "./pages/home";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <div className="App bg-secondary">
       <Homepage />
     </div>
   );

@@ -4,7 +4,7 @@ import bannerImage from "../../assets/images/banner-img-min.png";
 const Banner: React.FC = () => {
   return (
     <section className="bg-transparent container mx-auto">
-      <div className="relative isolate flex items-center py-16 sm:py-24 lg:py-36 gap-32">
+      <div className="relative isolate flex md:flex-row flex-col items-center py-16 md:py-20 lg:py-24 xl:py-36 xl:gap-32 lg:gap-24 md:gap-16 gap-12">
         {/* designs */}
         <div
           aria-hidden="true"
@@ -20,26 +20,17 @@ const Banner: React.FC = () => {
         </div>
         {/* designs ends */}
         {/* Left */}
-        <div className="mx-auto max-w-2xl">
-          <div className="hidden sm:mb-8 sm:flex sm:justify-start">
-            <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-darkGrey  ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Announcing our next round of Give Aways.{" "}
-              <a href="/" className="font-semibold text-primary">
-                <span aria-hidden="true" className="absolute inset-0" />
-                Learn More <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
-          </div>
+        <div className="md:basis-2/4 basis-full">
           <div className="text-left">
-            <h1 className="text-4xl font-bold tracking-tight text-primary sm:text-6xl">
+            <h1 className="xl:text-6xl lg:text-5xl md:text-4xl text-3xl font-bold tracking-tight text-primary">
               Digital art and collectibles
             </h1>
-            <p className="mt-6 text-lg leading-8 text-primary font-light">
-              Anim aute id magna aliqua ad ad non deserunt sunt. <br /> Qui
-              irure qui lorem cupidatat commodo. Elit sunt amet <br /> fugiat
-              veniam occaecat fugiat aliqua. Anim  aute id magna aliqua ad  <br />ad non
-              deserunt sunt. Qui irure qui lorem cupidatat <br /> commodo. Elit
-              sunt amet fugiat veniam occaecat fugiat aliqua.
+            <p className="mt-6 text-lg leading-8 text-primary font-light xl:pr-20 lg:pr-16 pr-0">
+              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
+              lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
+              fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt.
+              Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat
+              veniam occaecat fugiat aliqua.
             </p>
             <div className="mt-10 flex items-center justify-start gap-x-6">
               <a
@@ -49,7 +40,7 @@ const Banner: React.FC = () => {
                 Connect Wallet
               </a>
               <a
-                href="/"
+                href="#learnmore"
                 className="text-sm font-semibold leading-6 text-primary"
               >
                 Learn more <span aria-hidden="true">→</span>
@@ -58,7 +49,7 @@ const Banner: React.FC = () => {
           </div>
         </div>
         {/* Right */}
-        <div className="mx-auto max-w-2xl">
+        <div className="md:basis-2/4 basis-full">
           <img src={bannerImage} alt="banner" />
         </div>
         {/* designs */}
