@@ -11,7 +11,7 @@ const Header: React.FC = () => {
   const navigation = [
     { name: "Roadmap", href: "#roadmap" },
     { name: "Rewards", href: "#rewards" },
-    { name: "Contact", href: "/contact" },
+    { name: "Contact", href: "/forever-rwa/contact" },
   ];
 
   const handleScrollToSection = (href: string) => {

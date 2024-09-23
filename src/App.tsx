@@ -5,7 +5,7 @@ import Header from "./components/header/header";
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <Router basename="/forever-rwa">
       <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />
