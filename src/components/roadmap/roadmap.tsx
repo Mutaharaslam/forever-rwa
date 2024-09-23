@@ -40,7 +40,7 @@ const RoadMap: React.FC = () => {
               style={{
                 backgroundImage: `url(${borderbg})`,
                 height: `${progress}%`,
-                animation: "moveBackground 10s linear infinite",
+                animation: "moveBackground 15s linear infinite",
               }}
             ></div>
 
