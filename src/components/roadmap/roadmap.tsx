@@ -63,7 +63,7 @@ const RoadMap: React.FC = () => {
 
             {/* Progress Indicator Dot */}
             <div
-              className="absolute w-7 h-7 rounded-full bg-primary-light flex items-center justify-center text-white font-bold text-[11px] left-1/2 transform -translate-x-1/2  -translate-y-[28px] "
+              className="absolute w-7 h-7 rounded-full bg-white/60 flex items-center justify-center text-primary font-normal text-[11px] left-1/2 transform -translate-x-1/2  -translate-y-[28px] "
               style={{ top: `${progress}%` }} // Position based on progress
             >
               {progress}%
