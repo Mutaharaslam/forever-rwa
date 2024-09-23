@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/forever-rwa/static/css/main.16b010fc.css",
+    "main.js": "/forever-rwa/static/js/main.df04993e.js",
+    "static/media/banner-img-min.png": "/forever-rwa/static/media/banner-img-min.c727ac041f51867df45d.png",
+    "static/media/logo.png": "/forever-rwa/static/media/logo.4e681433d79e20567a5b.png",
+    "index.html": "/forever-rwa/index.html",
+    "main.16b010fc.css.map": "/forever-rwa/static/css/main.16b010fc.css.map",
+    "main.df04993e.js.map": "/forever-rwa/static/js/main.df04993e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.16b010fc.css",
+    "static/js/main.df04993e.js"
+  ]
+}
