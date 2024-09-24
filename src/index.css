@@ -135,14 +135,13 @@ h6 {
 .counter {
   background: rgb(30, 63, 63);
   background: linear-gradient(
-    35deg,
-    rgba(30, 63, 63, 1) 0%,
-    rgba(30, 63, 63, 1) 0%,
-    rgba(45, 88, 88, 1) 24%,
-    rgba(21, 45, 45, 1) 42%,
-    rgba(45, 88, 88, 1) 61%,
-    rgba(21, 45, 45, 1) 80%,
-    rgba(64, 128, 128, 1) 100%
+    35deg,    
+    var(--primary-900) 0%,
+    var(--primary) 24%,
+    var(--primary-900) 42%,
+    var(--primary) 61%,
+    var(--primary-900) 80%,
+    var(--primary) 100%
   );
 }
 

@@ -113,7 +113,7 @@ const RoadMap: React.FC = () => {
         </div>
 
         {/* Roadmap Section 3 */}
-        <div className="flex lg:items-start items-end lg:flex-row flex-col-reverse w-full xl:py-32 lg:py-24 md:py-16 py-10 xl:gap-72 lg:gap-56">
+        <div className="flex lg:items-start items-end lg:flex-row flex-col-reverse w-full xl:pt-32 lg:pt-24 md:pt-16 pt-10 pb-0 xl:gap-72 lg:gap-56">
           <OnScrollView className="lg:w-1/2 w-[90%] flex justify-end">
             <img src={Image3} alt="img3" className="object-cover" />
           </OnScrollView>

@@ -14,15 +14,17 @@ const OnScrollViewHorizontal: React.FC<OnScrollViewProps> = ({
 }) => {
   const cardVariants: Variants = {
     offscreen: {
-      x: fromLeft ? -1000 : 1000,
+      x: fromLeft ? -500 : 500,
+      opacity: 0,
     },
     onscreen: {
       x: 0,
+      opacity: 1,
       rotate: 0,
       transition: {
         type: "spring",
         bounce: 0.2,
-        duration: 1.5,
+        duration: 1.8,
       },
     },
   };

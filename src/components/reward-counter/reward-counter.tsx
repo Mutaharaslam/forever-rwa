@@ -61,7 +61,7 @@ const RewardCounter: React.FC = () => {
                   key={index}
                   className={`${
                     digit === "0" || null
-                      ? "bg-primary text-primary-700"
+                      ? "bg-primary text-primary-400"
                       : "counter transition-all"
                   } digit-box flex items-center justify-center text-white xl:text-3xl lg:text-2xl md:text-xl text-lg lg:rounded-xl md:rounded-lg rounded-md xl:h-15 lg:h-12 h-10 xl:w-12 lg:w-10 w-8`}
                 >

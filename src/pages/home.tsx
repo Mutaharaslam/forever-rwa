@@ -13,7 +13,7 @@ const Homepage: React.FC = () => {
       <RewardCounter />
       <Divider  className="lg:my-16 my-8"/>
       <RoadMap />
-      <Divider  className="lg:my-10 my-8"/>
+      <Divider  className="lg:my-16 my-8"/>
     </div>
   );
 };

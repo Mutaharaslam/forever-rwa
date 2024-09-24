@@ -7,6 +7,8 @@ import { IoClose } from "react-icons/io5";
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navigation = [
     { name: "Roadmap", href: "#roadmap" },
@@ -14,22 +16,16 @@ const Header: React.FC = () => {
     { name: "Contact", href: "/contact" },
   ];
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
   const handleNavigation = (href: string) => {
     if (href.startsWith("#")) {
-      // If on a different page (like /contact), navigate back to the homepage
       if (location.pathname !== "/") {
         navigate("/");
       }
-      // Scroll to the section
       const section = document.querySelector(href);
       if (section) {
         section.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      // For regular page navigation like '/contact'
       navigate(href);
     }
   };
