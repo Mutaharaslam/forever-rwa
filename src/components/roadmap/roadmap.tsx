@@ -21,7 +21,7 @@ const RoadMap: React.FC = () => {
   return (
     <>
       <section id="roadmap" className="container py-24">
-        <h1 className="text-center xl:text-6xl lg:text-5xl md:text-4xl text-3xl font-semibold text-primary-dark mb-4">
+        <h1 className="text-center xl:text-5xl lg:text-4xl md:text-3xl text-2xl font-semibold tracking-tight text-primary-dark mb-4">
           The Road Map
         </h1>
         <p className="text-center text-base font-normal text-primary mb-16 px-56">

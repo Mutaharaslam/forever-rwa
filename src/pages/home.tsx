@@ -7,7 +7,7 @@ import RewardCounter from '../components/reward-counter/reward-counter';
 
 const Homepage: React.FC = () => {
   return (
-    <div className="Homepage bg-secondary h-full flex flex-col md:px-10 px-6">
+    <div className="Homepage bg-secondary h-full flex flex-col">
       <Banner />
       <RoadMap />
       <RewardCounter />

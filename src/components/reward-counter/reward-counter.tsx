@@ -26,7 +26,7 @@ const RewardCounter: React.FC = () => {
       id="rewards"
       className="container py-24 flex flex-col justify-start items-center"
     >
-      <h1 className="text-center xl:text-6xl lg:text-5xl md:text-4xl text-3xl font-semibold text-primary-dark mb-4">
+      <h1 className="text-center  xl:text-5xl lg:text-4xl md:text-3xl text-2xl font-semibold tracking-tight text-primary-dark  mb-4">
         USDT Reward amount sent up to date
       </h1>
       <p className="text-center text-base font-normal text-primary mb-8 px-56">

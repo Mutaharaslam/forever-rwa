@@ -6,11 +6,13 @@ import Header from "./components/header/header";
 const App: React.FC = () => {
   return (
     <Router basename="/forever-rwa">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <div className="md:px-10 px-6">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </div>
     </Router>
   );
 };
