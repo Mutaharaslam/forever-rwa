@@ -7,8 +7,8 @@ const RewardCounter: React.FC = () => {
   };
 
   const [reward, setReward] = useState<number>(0);
-  const targetReward: number = 9872; // Set your target USDT amount here
-  const baseIncrementPercentage: number = 0.02; // Base increment as a percentage of the targetReward
+  const targetReward: number = 8499872; // Set your target USDT amount here
+  const baseIncrementPercentage: number = 0.01; // Base increment as a percentage of the targetReward
   const increment: number = Math.max(
     1,
     Math.floor(targetReward * baseIncrementPercentage)
