@@ -128,7 +128,7 @@ h6 {
     background-position: 0 0;
   }
   100% {
-    background-position: 30% 0;
+    background-position: 40% 0;
   }
 }
 
@@ -145,7 +145,6 @@ h6 {
     rgba(64, 128, 128, 1) 100%
   );
 }
-
 
 .fade-enter {
   opacity: 0;

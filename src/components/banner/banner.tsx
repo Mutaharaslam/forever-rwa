@@ -2,6 +2,7 @@ import React from "react";
 import bannerImage from "../../assets/images/banner-img-min.png";
 import { GoCodeOfConduct } from "react-icons/go";
 import { MdGraphicEq } from "react-icons/md";
+import OnScrollViewHorizontal from "../atoms/onScrollviewHosrizontal";
 
 const Banner: React.FC = () => {
   return (
@@ -22,7 +23,7 @@ const Banner: React.FC = () => {
         </div>
         {/* designs ends */}
         {/* Left */}
-        <div className="md:basis-2/4 basis-full">
+        <OnScrollViewHorizontal fromLeft className="md:basis-2/4 basis-full">
           <div className="text-left">
             <h1 className="xl:text-5xl lg:text-4xl md:text-3xl text-2xl font-semibold tracking-tight mb-5 text-secondary">
               The Forever Project
@@ -66,11 +67,11 @@ const Banner: React.FC = () => {
               </a>
             </div>
           </div>
-        </div>
+        </OnScrollViewHorizontal>
         {/* Right */}
-        <div className="md:basis-2/4 basis-full">
+        <OnScrollViewHorizontal className="md:basis-2/4 basis-full">
           <img src={bannerImage} alt="banner" />
-        </div>
+        </OnScrollViewHorizontal>
         {/* designs */}
         <div
           aria-hidden="true"

@@ -39,7 +39,9 @@ const Header: React.FC = () => {
             className="flex items-center justify-start md:basis-1/4 basis-2/4 gap-2 md:min-w-52 min-w-fit"
           >
             <img src={logo} alt="Logo" className="w-16 mr-2" />
-            <h1 className="text-white font-medium text-xl font-serif">Forever RWA</h1>
+            <h1 className="text-white font-medium text-xl font-serif">
+              Forever RWA
+            </h1>
           </Link>
 
           <div className="hidden lg:flex items-center justify-end md:basis-3/4 basis-2/4">
@@ -66,7 +68,7 @@ const Header: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden text-primary focus:outline-none text-2xl"
+            className="lg:hidden text-white focus:outline-none text-4xl"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <IoClose /> : <IoMdMenu />}
@@ -76,17 +78,22 @@ const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden flex flex-col items-start bg-[#f3f2dc] rounded-xl px-8 pb-7">
+        <div className="lg:hidden flex flex-col items-start bg-primary rounded-xl px-8 pb-7">
           {navigation.map(({ name, href }, index) => (
             <button
               key={index}
               onClick={() => handleScrollToSection(href)}
-              className="text-black hover:text-primary font-medium text-base my-3"
+              className="text-white focus:text-primary-700 font-medium text-base my-3"
             >
               {name}
             </button>
           ))}
-          <button className="mt-3 w-full flex items-center justify-center cursor-pointer text-primary scale-1 hover:text-primary transition-all group rounded-md bg-primary border border-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-transparent">
+          <button
+            className="mt-3 w-full flex items-center justify-center cursor-pointer
+           scale-1 hover:text-primary-700 transition-all group rounded-md bg-primary-700 
+           border border-primary-700 px-3.5 py-2.5 text-sm font-semibold 
+          text-white shadow-sm hover:bg-transparent"
+          >
             <IoWalletOutline className="text-2xl group-hover:scale-110" />
             <span className="ml-2 text-base font-semibold select-none">
               Connect Wallet

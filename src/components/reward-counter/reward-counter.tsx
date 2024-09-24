@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import OnScrollView from "../atoms/onScrollview";
 
 const RewardCounter: React.FC = () => {
   const easeInOutQuad = (t: number): number => {
@@ -46,18 +46,14 @@ const RewardCounter: React.FC = () => {
   return (
     <section
       id="rewards"
-      className=" container pb-12 xl:pt-44 lg:pt-28 pt-16 flex flex-col justify-start items-center relative z-20"
+      className=" container pb-12 xl:pt-24 lg:pt-16 pt-10 flex flex-col justify-start items-center relative z-20"
     >
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ ease: "linear", duration: 2 }}
-      >
+      <OnScrollView>
         <h1 className="text-center lg:text-4xl md:text-3xl text-2xl font-bold tracking-tight text-primary-dark  mb-4">
           Rewards Paid Out
         </h1>
         <div className="flex items-center justify-center lg:mb-16 mb-12">
-          <div className="counter-box shadow-2xl rounded-xl bg-secondary-200 flex items-center justify-center gap-2 md:px-6 p-4 flex-wrap">
+          <div className="counter-box shadow-2xl rounded-xl bg-primary-700 flex items-center justify-center gap-2 md:px-6 p-4 flex-wrap">
             {formattedReward
               .split("")
               .map((digit: string, index: React.Key | null | undefined) => (
@@ -65,19 +61,19 @@ const RewardCounter: React.FC = () => {
                   key={index}
                   className={`${
                     digit === "0" || null
-                      ? "bg-secondary-300 text-secondary-400 "
+                      ? "bg-primary text-primary-700"
                       : "counter transition-all"
                   } digit-box flex items-center justify-center text-white xl:text-3xl lg:text-2xl md:text-xl text-lg lg:rounded-xl md:rounded-lg rounded-md xl:h-15 lg:h-12 h-10 xl:w-12 lg:w-10 w-8`}
                 >
                   {digit}
                 </div>
               ))}
-            <div className="flex items-center justify-center sm:w-auto w-full font-bold font-sans lg:text-2xl md:text-xl sm:text-lg text-base text-primary">
+            <div className="flex items-center justify-center sm:w-auto w-full font-bold font-sans lg:text-2xl md:text-xl sm:text-lg text-base text-white">
               USDT
             </div>
           </div>
         </div>
-      </motion.div>
+      </OnScrollView>
       <div className="xl:px-56 lg:px-44 md:px-24 sm:px-10 px-0">
         <h3 className="text-center lg:text-2xl md:text-xl text-lg font-bold tracking-tight text-primary-dark  mb-2">
           100-200% rewards, with a guaranteed minimum of 10% of passive income
