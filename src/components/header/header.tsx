@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoWalletOutline } from "react-icons/io5";
-import { Link } from "react-router-dom"; // Import Link
+import { Link, useLocation, useNavigate } from "react-router-dom"; // Import Link
 import logo from "../../assets/images/logo.png";
 import { IoMdMenu } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
@@ -11,22 +11,28 @@ const Header: React.FC = () => {
   const navigation = [
     { name: "Roadmap", href: "#roadmap" },
     { name: "Rewards", href: "#rewards" },
-    { name: "Contact", href: "/forever-rwa/contact" },
+    { name: "Contact", href: "/contact" },
   ];
 
-  const handleScrollToSection = (href: string) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavigation = (href: string) => {
     if (href.startsWith("#")) {
-      const targetElement = document.querySelector(href);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: "smooth" });
+      // If on a different page (like /contact), navigate back to the homepage
+      if (location.pathname !== "/") {
+        navigate("/");
+      }
+      // Scroll to the section
+      const section = document.querySelector(href);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      // Navigate to external links
-      window.location.href = href;
+      // For regular page navigation like '/contact'
+      navigate(href);
     }
-    setIsMobileMenuOpen(false); // Close mobile menu after selection
   };
-
   return (
     <header className="bg-primary text-white container mx-auto mt-12 rounded-xl shadow-md relative z-50">
       <nav
@@ -46,13 +52,13 @@ const Header: React.FC = () => {
 
           <div className="hidden lg:flex items-center justify-end md:basis-3/4 basis-2/4">
             {navigation.map(({ name, href }, index) => (
-              <button
+              <span
                 key={index}
-                onClick={() => handleScrollToSection(href)}
-                className="text-white hover:text-primary-100 text-base xl:mx-6 lg:mx-4 mx-4 font-medium"
+                onClick={() => handleNavigation(href)}
+                className="text-white hover:text-primary-100 text-base xl:mx-6 lg:mx-4 mx-4 font-medium cursor-pointer"
               >
                 {name}
-              </button>
+              </span>
             ))}
             <button
               className="ml-3 flex items-center cursor-pointer text-white scale-1 hover:text-white
@@ -80,13 +86,13 @@ const Header: React.FC = () => {
       {isMobileMenuOpen && (
         <div className="lg:hidden flex flex-col items-start bg-primary rounded-xl px-8 pb-7">
           {navigation.map(({ name, href }, index) => (
-            <button
+            <span
               key={index}
-              onClick={() => handleScrollToSection(href)}
-              className="text-white focus:text-primary-700 font-medium text-base my-3"
+              onClick={() => handleNavigation(href)}
+              className="text-white hover:text-primary-100 text-base xl:mx-6 lg:mx-4 mx-4 font-medium cursor-pointer"
             >
               {name}
-            </button>
+            </span>
           ))}
           <button
             className="mt-3 w-full flex items-center justify-center cursor-pointer

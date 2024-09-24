@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../assets/images/logo.png";
+import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   return (
@@ -15,15 +16,15 @@ const Footer: React.FC = () => {
           </p>
         </div>
         <div className="flex space-x-4 text-primary">
-          <a href="/" className="hover:text-secondary-400">
+          <Link to="/" className="hover:text-secondary-400">
             Privacy Policy
-          </a>
-          <a href="/" className="hover:text-secondary-400">
+          </Link>
+          <Link to="/" className="hover:text-secondary-400">
             Terms of Service
-          </a>
-          <a href="/contact" className="hover:text-secondary-400">
+          </Link>
+          <Link to="/contact" className="hover:text-secondary-400">
             Contact
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
