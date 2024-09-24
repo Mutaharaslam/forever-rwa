@@ -1,41 +1,128 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const RewardCounter: React.FC = () => {
-  const [reward, setReward] = useState(0);
-  const targetReward = 9870; // Set your target USDT amount here
-  const duration = 2000; // Duration for counting animation in milliseconds
+  const easeInOutQuad = (t: number): number => {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  };
+
+  const [reward, setReward] = useState<number>(0);
+  const targetReward: number = 9872; // Set your target USDT amount here
+  const baseIncrementPercentage: number = 0.02; // Base increment as a percentage of the targetReward
+  const increment: number = Math.max(
+    1,
+    Math.floor(targetReward * baseIncrementPercentage)
+  ); // Calculate increment based on targetReward
+  const duration: number = (targetReward / increment) * 50; // Duration in milliseconds
 
   useEffect(() => {
-    let start = 0;
-    const end = targetReward;
-    const increment = Math.ceil(end / (duration / 60)); // Update every 100ms
+    let animationFrameId: number;
+    const startTime: number = performance.now();
 
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        start = end;
-        clearInterval(timer);
+    const animate = (currentTime: number) => {
+      const elapsed: number = currentTime - startTime;
+      const progress: number = Math.min(elapsed / duration, 1);
+      const easedProgress: number = easeInOutQuad(progress); // Apply easing function
+
+      setReward(Math.floor(easedProgress * targetReward)); // Update reward based on eased progress
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
       }
-      setReward(start);
-    }, 100);
+    };
 
-    return () => clearInterval(timer);
-  }, [targetReward, duration]);
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [targetReward, duration, increment]);
+
+  const formattedReward: string = reward.toLocaleString("en-US", {
+    minimumIntegerDigits: 8,
+    useGrouping: false,
+  });
+
   return (
     <section
       id="rewards"
-      className="container py-24 flex flex-col justify-start items-center"
+      className=" container pb-12 xl:pt-44 lg:pt-28 pt-16 flex flex-col justify-start items-center relative z-20"
     >
-      <h1 className="text-center  xl:text-5xl lg:text-4xl md:text-3xl text-2xl font-semibold tracking-tight text-primary-dark  mb-4">
-        USDT Reward amount sent up to date
-      </h1>
-      <p className="text-center text-base font-normal text-primary mb-8 px-56">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry.
-      </p>
-      <h3 className="text-4xl max-w-fit lg:min-w-96 min-w-72  font-semibold border border-secondary counter px-10 py-7 rounded-2xl text-white text-center">
-        {reward.toLocaleString()} USDT
-      </h3>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ ease: "linear", duration: 2 }}
+      >
+        <h1 className="text-center lg:text-4xl md:text-3xl text-2xl font-bold tracking-tight text-primary-dark  mb-4">
+          Rewards Paid Out
+        </h1>
+        <div className="flex items-center justify-center lg:mb-16 mb-12">
+          <div className="counter-box shadow-2xl rounded-xl bg-secondary-200 flex items-center justify-center gap-2 md:px-6 p-4 flex-wrap">
+            {formattedReward
+              .split("")
+              .map((digit: string, index: React.Key | null | undefined) => (
+                <div
+                  key={index}
+                  className={`${
+                    digit === "0" || null
+                      ? "bg-secondary-300 text-secondary-400 "
+                      : "counter transition-all"
+                  } digit-box flex items-center justify-center text-white xl:text-3xl lg:text-2xl md:text-xl text-lg lg:rounded-xl md:rounded-lg rounded-md xl:h-15 lg:h-12 h-10 xl:w-12 lg:w-10 w-8`}
+                >
+                  {digit}
+                </div>
+              ))}
+            <div className="flex items-center justify-center sm:w-auto w-full font-bold font-sans lg:text-2xl md:text-xl sm:text-lg text-base text-primary">
+              USDT
+            </div>
+          </div>
+        </div>
+      </motion.div>
+      <div className="xl:px-56 lg:px-44 md:px-24 sm:px-10 px-0">
+        <h3 className="text-center lg:text-2xl md:text-xl text-lg font-bold tracking-tight text-primary-dark  mb-2">
+          100-200% rewards, with a guaranteed minimum of 10% of passive income
+        </h3>
+        <p className="text-base leading-6 text-secondary font-light mb-4 text-center">
+          As developers and contractors, we believe in the power of real estate
+          to make a difference for those in need whether it is by providing
+          electricity facilitating healthcare and education or simply by
+          providing drinking water, and the aim of the Forever project is to do
+          exactly that, having an ever lasting effect, while creating value for
+          everyone involved.
+        </p>
+        <h3 className="text-center lg:text-2xl md:text-xl text-lg font-bold tracking-tight text-primary-dark  mb-2">
+          Never going to 0
+        </h3>
+        <p className="text-base leading-6 text-secondary font-light mb-4 text-center">
+          The Forever project is 100% backed by real estate and will never lose
+          its value
+        </p>
+        <h3 className="text-center lg:text-2xl md:text-xl text-lg font-bold tracking-tight text-primary-dark  mb-2">
+          Buy and receive rewards anywhere in the world
+        </h3>
+        <p className="text-base leading-6 text-secondary font-light mb-4 text-center">
+          Unlike most platforms, there are no restrictions on NFT purchases and
+          sales ! so you can buy and sell and earn money from anywhere in the
+          world.
+        </p>
+        <h3 className="text-center lg:text-2xl md:text-xl text-lg font-bold tracking-tight text-primary-dark  mb-2">
+          Sell any time!
+        </h3>
+        <p className="text-base leading-6 text-secondary font-light mb-4 text-center">
+          Unlike fractional ownership platforms which restrict transactions to
+          their platform, the Forever Project's NFT can be sold and transferred
+          at any time either directly to your friends or in an open market place
+          like Opensea
+        </p>
+        <h3 className="text-center lg:text-2xl md:text-xl text-lg font-bold tracking-tight text-primary-dark  mb-2">
+          Buy back promise!
+        </h3>
+        <p className="text-base leading-6 text-secondary font-light mb-4 text-center">
+          In case of any unforeseen circumstances occurring causing the
+          discontinuity of The Forever Project we will buy all NFTs back from
+          holders.
+        </p>
+      </div>
     </section>
   );
 };

@@ -6,23 +6,23 @@ const ContactUs: React.FC = () => {
       <div className="mx-auto flex lg:gap-24 gap-10 lg:items-center items-start justify-start lg:flex-row flex-col w-full">
         {/* Left */}
         <div className="md:basis-2/4 basis-full pb-6">
-          <h2 className="leading-[1.15] font-semibold mb-4 xl:text-4xl lg:text-3xl md:text-2xl text-xl text-primary-dark">
+          <h2 className="leading-normal font-bold mb-4 xl:text-4xl lg:text-3xl md:text-2xl text-xl text-secondary">
             Let's Connect
           </h2>
-          <p className="lg:text-lg text-base font-light leading-tight text-primary-800 mb-8 lg:pr-48">
+          <p className="text-base font-light leading-normal text-primary-800 mb-8 lg:pr-48">
             Whether you have questions, need support, or just want to share your
             thoughts, our team is ready to listen. Fill out the form or reach
             out via our contact details.{" "}
             <br className="lg:inline-block hidden" />{" "}
           </p>
-          <h3 className="leading-[1.15] font-medium mb-3 xl:text-3xl lg:text-2xl md:text-xl text-lg text-primary">
-            Follow Lucy on Social Media
+          <h3 className="leading-[1.15] font-semibold mb-3 lg:text-xl text-lg text-primary">
+            Follow us on Social Media
           </h3>
           <nav className="flex gap-3 text-lg">
             <a
-              href="https://www.facebook.com/medlucyofficial"
+              href="/"
               target="__blank"
-              className="w-10 h-10 text-primary-light flex items-center justify-center leading-[0] bg-secondary-light hover:bg-primary hover:text-secondary-light  rounded-full"
+              className="w-10 h-10 text-primary-50 flex items-center justify-center leading-[0] bg-primary hover:bg-primary-600 hover:text-secondary-100 rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -44,9 +44,9 @@ const ContactUs: React.FC = () => {
               </svg>
             </a>
             <a
-              href="https://www.instagram.com/medlucyofficial/"
+              href="/"
               target="__blank"
-              className="w-10 h-10 text-primary-light flex items-center justify-center leading-[0] bg-secondary-light hover:bg-primary hover:text-secondary-light  rounded-full"
+              className="w-10 h-10 text-primary-50 flex items-center justify-center leading-[0] bg-primary hover:bg-primary-600 hover:text-secondary-100 rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -79,9 +79,9 @@ const ContactUs: React.FC = () => {
               </svg>
             </a>
             <a
-              href="https://www.linkedin.com/company/medlucy/"
+              href="/"
               target="__blank"
-              className="w-10 h-10 text-primary-light flex items-center justify-center leading-[0] bg-secondary-light hover:bg-primary hover:text-secondary-light  rounded-full"
+              className="w-10 h-10 text-primary-50 flex items-center justify-center leading-[0] bg-primary hover:bg-primary-600 hover:text-secondary-100 rounded-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,7 @@ const ContactUs: React.FC = () => {
           </nav>
         </div>
         {/* Right */}
-        <form className=" p-8 px-6 rounded-xl w-full md:basis-2/4 basis-full shadow-xl bg-white/10">
+        <form className=" p-8 px-6 rounded-xl w-full md:basis-2/4 basis-full shadow-xl bg-secondary-100">
           <div className="mb-4">
             <label className="block text-sm font-semibold mb-1" htmlFor="name">
               Name

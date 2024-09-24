@@ -28,7 +28,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-secondary-light text-white container mx-auto mt-12 rounded-xl shadow-md relative z-50">
+    <header className="bg-primary text-white container mx-auto mt-12 rounded-xl shadow-md relative z-50">
       <nav
         className="relative mx-auto flex py-4 px-6 items-center justify-between"
         aria-label="Global"
@@ -39,7 +39,7 @@ const Header: React.FC = () => {
             className="flex items-center justify-start md:basis-1/4 basis-2/4 gap-2 md:min-w-52 min-w-fit"
           >
             <img src={logo} alt="Logo" className="w-16 mr-2" />
-            <h1 className="text-primary font-medium text-xl">Forever RWA</h1>
+            <h1 className="text-white font-medium text-xl font-serif">Forever RWA</h1>
           </Link>
 
           <div className="hidden lg:flex items-center justify-end md:basis-3/4 basis-2/4">
@@ -47,12 +47,16 @@ const Header: React.FC = () => {
               <button
                 key={index}
                 onClick={() => handleScrollToSection(href)}
-                className="text-primary hover:text-primary-light text-base xl:mx-6 lg:mx-4 mx-4 font-medium"
+                className="text-white hover:text-primary-100 text-base xl:mx-6 lg:mx-4 mx-4 font-medium"
               >
                 {name}
               </button>
             ))}
-            <button className="ml-3 flex items-center cursor-pointer text-primary scale-1 hover:text-primary transition-all group rounded-md bg-primary border border-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-transparent">
+            <button
+              className="ml-3 flex items-center cursor-pointer text-white scale-1 hover:text-white
+             transition-all group rounded-md bg-primary-700 border border-primary px-3.5 py-2.5 text-sm font-semibold 
+            shadow-sm hover:bg-transparent hover:border-white"
+            >
               <IoWalletOutline className="text-2xl group-hover:scale-110" />
               <span className="ml-2 text-base font-semibold select-none">
                 Connect Wallet
