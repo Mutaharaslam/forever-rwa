@@ -52,10 +52,10 @@ const Header: React.FC = () => {
     <header
       className={`${
         isScrolled
-          ? "bg-white-base border shadow-xl border-secondary-50"
+          ? "bg-white-base border shadow-xl border-secondary-50 !left-0 !right-0"
           : "bg-transparent"
       } ${isMobileMenuOpen ? "!px-0" : ""}
-       bg-transparent text-white fixed top-0 left-0 w-full z-50 transition-all md:px-0 px-2`}
+       bg-transparent text-white fixed top-0 xl:left-10 xl:right-10 md:left-4 md:right-4 left-0 right-0 z-50 transition-all md:px-0 px-2`}
     >
       <nav
         className={`${
