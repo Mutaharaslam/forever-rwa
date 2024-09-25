@@ -9,7 +9,7 @@ interface OnScrollViewProps {
 const OnScrollView: React.FC<OnScrollViewProps> = ({ className, children }) => {
   const cardVariants: Variants = {
     offscreen: {
-      y: 500,
+      y: 200,
       opacity: 0,
     },
     onscreen: {

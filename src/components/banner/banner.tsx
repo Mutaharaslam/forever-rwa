@@ -1,13 +1,15 @@
 import React from "react";
 import bannerImage from "../../assets/images/banner-img-min.png";
-import { GoCodeOfConduct } from "react-icons/go";
-import { MdGraphicEq } from "react-icons/md";
+// import { GoCodeOfConduct } from "react-icons/go";
+// import { MdGraphicEq } from "react-icons/md";
 import OnScrollViewHorizontal from "../atoms/onScrollviewHosrizontal";
+import { FaDotCircle } from "react-icons/fa";
 
 const Banner: React.FC = () => {
   return (
     <section className="bg-transparent container mx-auto">
-      <div className="lg:px-1 relative isolate flex md:flex-row flex-col items-center py-16 md:py-24 lg:py-32 xl:py-40 xl:gap-32 lg:gap-24 md:gap-16 gap-12">
+      <div className="lg:px-1 relative isolate flex md:flex-row flex-col items-center 
+      pb-16 md:pb-24 lg:pb-32 xl:pb-40 pt-48 xl:pt-64 xl:gap-32 lg:gap-24 gap-16">
         {/* designs */}
         <div
           aria-hidden="true"
@@ -29,14 +31,14 @@ const Banner: React.FC = () => {
               The Forever Project
             </h1>
             <ul className="pl-0">
-              <li className="flex items-center gap-4 mb-4 text-primary">
-                <MdGraphicEq className="w-6 h-6 shrink-0 grow-0" />
+              <li className="flex items-center gap-3 mb-4 text-primary-700">
+                <FaDotCircle className="w-4 shrink-0 grow-0" />
                 <h4 className="md:text-xl text-lg font-semibold tracking-normal leading-none">
                   Make a Difference
                 </h4>
               </li>
-              <li className="flex items-center gap-4 mb-5 text-primary">
-                <GoCodeOfConduct className="w-6 h-6 shrink-0 grow-0" />
+              <li className="flex items-center gap-3 mb-5 text-primary-700">
+                <FaDotCircle className="w-4 shrink-0 grow-0" />
                 <div>
                   <h4 className="md:text-xl text-lg font-semibold tracking-normal leading-none">
                     Make a Profit

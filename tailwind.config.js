@@ -2,6 +2,16 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1rem", // Base padding
+        sm: "1rem", // Padding for small screens
+        md: "1rem", // Padding for medium screens
+        lg: "1.2rem", // Padding for large screens
+        xl: "2rem", // Padding for extra large screens
+      },
+    },
     screens: {
       sm: "480px",
       md: "768px",
@@ -22,8 +32,8 @@ module.exports = {
       bold: 700,
       black: 900,
     },
-    container: {
-      center: true,
+    backgroundImage: {
+      "layyer-bg": "url('/src/assets/images/wave.png')",
     },
     extend: {
       spacing: {
