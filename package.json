@@ -1,8 +1,8 @@
 {
   "name": "forever-rwa",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
-  "homepage": "https://Mutaharaslam.github.io/forever-rwa",
+  "homepage": "https://www.mutaharaslam.com/forever-rwa",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
