@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/forever-rwa/static/css/main.e0438fda.css",
-    "main.js": "/forever-rwa/static/js/main.cd507296.js",
+    "main.css": "/forever-rwa/static/css/main.b7aebfb9.css",
+    "main.js": "/forever-rwa/static/js/main.74cba015.js",
     "static/media/Inter-Black.ttf": "/forever-rwa/static/media/Inter-Black.9e672700f8925f81181f.ttf",
     "static/media/Inter-Bold.ttf": "/forever-rwa/static/media/Inter-Bold.5a1fb798ae4f9a678af1.ttf",
     "static/media/Inter-SemiBold.ttf": "/forever-rwa/static/media/Inter-SemiBold.b29bd1de85b2852e7e40.ttf",
@@ -14,11 +14,11 @@
     "static/media/banner-img-min.png": "/forever-rwa/static/media/banner-img-min.c727ac041f51867df45d.png",
     "static/media/logo.png": "/forever-rwa/static/media/logo.4e681433d79e20567a5b.png",
     "index.html": "/forever-rwa/index.html",
-    "main.e0438fda.css.map": "/forever-rwa/static/css/main.e0438fda.css.map",
-    "main.cd507296.js.map": "/forever-rwa/static/js/main.cd507296.js.map"
+    "main.b7aebfb9.css.map": "/forever-rwa/static/css/main.b7aebfb9.css.map",
+    "main.74cba015.js.map": "/forever-rwa/static/js/main.74cba015.js.map"
   },
   "entrypoints": [
-    "static/css/main.e0438fda.css",
-    "static/js/main.cd507296.js"
+    "static/css/main.b7aebfb9.css",
+    "static/js/main.74cba015.js"
   ]
 }
