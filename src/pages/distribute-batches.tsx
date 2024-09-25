@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Divider from "../components/divider/divider";
 
 const DistributeBatches: React.FC = () => {
   const [totalAwardAmount, setTotalAwardAmount] = useState("");
