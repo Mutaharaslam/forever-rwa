@@ -16,6 +16,9 @@ const Footer: React.FC = () => {
           </p>
         </div>
         <div className="flex space-x-4 text-primary">
+          <Link to="/distribute" className="hover:text-secondary-400">
+            Distribute Batch
+          </Link>
           <Link to="/" className="hover:text-secondary-400">
             Privacy Policy
           </Link>
