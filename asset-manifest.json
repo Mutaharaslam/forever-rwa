@@ -1,25 +1,24 @@
 {
   "files": {
-    "main.css": "/forever-rwa/static/css/main.99c38769.css",
-    "main.js": "/forever-rwa/static/js/main.64c86c7e.js",
+    "main.css": "/forever-rwa/static/css/main.e0438fda.css",
+    "main.js": "/forever-rwa/static/js/main.bb46aa2f.js",
     "static/media/Inter-Black.ttf": "/forever-rwa/static/media/Inter-Black.9e672700f8925f81181f.ttf",
     "static/media/Inter-Bold.ttf": "/forever-rwa/static/media/Inter-Bold.5a1fb798ae4f9a678af1.ttf",
     "static/media/Inter-SemiBold.ttf": "/forever-rwa/static/media/Inter-SemiBold.b29bd1de85b2852e7e40.ttf",
     "static/media/Inter-Medium.ttf": "/forever-rwa/static/media/Inter-Medium.5dae48e81a517abc0388.ttf",
     "static/media/Inter-Light.ttf": "/forever-rwa/static/media/Inter-Light.d1e8c8b5a3fb319d0312.ttf",
     "static/media/Inter-Regular.ttf": "/forever-rwa/static/media/Inter-Regular.abeb949120ef8201e76a.ttf",
-    "static/media/slider-bg-2.jpg": "/forever-rwa/static/media/slider-bg-2.4c606575c7bde7861929.jpg",
     "static/media/img2.jpg": "/forever-rwa/static/media/img2.d5088f6a32d7af466cd0.jpg",
     "static/media/img5.jpg": "/forever-rwa/static/media/img5.5a67ee3be9780b52c8da.jpg",
     "static/media/img3.jpg": "/forever-rwa/static/media/img3.5b97dccdf5d59b05cb32.jpg",
     "static/media/banner-img-min.png": "/forever-rwa/static/media/banner-img-min.c727ac041f51867df45d.png",
     "static/media/logo.png": "/forever-rwa/static/media/logo.4e681433d79e20567a5b.png",
     "index.html": "/forever-rwa/index.html",
-    "main.99c38769.css.map": "/forever-rwa/static/css/main.99c38769.css.map",
-    "main.64c86c7e.js.map": "/forever-rwa/static/js/main.64c86c7e.js.map"
+    "main.e0438fda.css.map": "/forever-rwa/static/css/main.e0438fda.css.map",
+    "main.bb46aa2f.js.map": "/forever-rwa/static/js/main.bb46aa2f.js.map"
   },
   "entrypoints": [
-    "static/css/main.99c38769.css",
-    "static/js/main.64c86c7e.js"
+    "static/css/main.e0438fda.css",
+    "static/js/main.bb46aa2f.js"
   ]
 }
