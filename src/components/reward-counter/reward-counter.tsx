@@ -70,7 +70,7 @@ const RewardCounter: React.FC = () => {
                 </div>
               ))}
             <div className="flex items-end lg:mt-1 justify-center sm:w-auto w-full font-semibold font-serif md:text-xl sm:text-lg text-base text-white">
-              USDTs
+              USDT
             </div>
           </div>
         </div>

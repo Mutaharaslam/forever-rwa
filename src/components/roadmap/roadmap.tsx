@@ -70,10 +70,10 @@ const RoadMap: React.FC = () => {
           {/* Progress Stops at specific percentages */}
 
           {[
-            { percent: 2, placement: "left" },
-            { percent: 38, placement: "right" },
-            { percent: 76, placement: "left" },
-            { percent: 99, placement: "left" },
+            { percent: 2, nfts: 22, placement: "left" },
+            { percent: 38, nfts: 4232, placement: "right" },
+            { percent: 76, nfts: 7832, placement: "left" },
+            { percent: 99, nfts: 44232, placement: "left" },
           ].map((stop) => (
             <div
               key={stop.percent}
@@ -119,10 +119,10 @@ const RoadMap: React.FC = () => {
           </OnScrollView>
           <OnScrollViewHorizontal className="lg:w-1/2 w-[90%] lg:mb-0 mb-6">
             <h3 className="lg:text-2xl md:text-xl text-lg text-primary-dark flex justify-start items-center gap-4 font-bold m-0 mb-2 relative">
-              <BiSolidLeftArrow className=" absolute lg:-left-12 md:-left-8 -left-5" />
+              {/* <BiSolidLeftArrow className=" absolute lg:-left-12 md:-left-8 -left-5" /> */}
               Phase One
             </h3>
-            <p className="xl:text-base text-sm xl:pr-16 lg:pr-6 ">
+            <p className="xl:text-base text-sm xl:pr-16 lg:pr-6 text-justify">
               During this phase we guarantee a minimum of 10% rewards
               distributed on a quarterly basis.
             </p>
@@ -136,11 +136,11 @@ const RoadMap: React.FC = () => {
             className="lg:w-1/2 w-[90%] lg:text-right text-left flex flex-col lg:items-end items-start lg:mb-0 mb-6"
           >
             <h3 className="lg:text-2xl md:text-xl text-lg text-primary-dark flex lg:justify-end items-center gap-4 font-bold m-0 mb-2 relative">
-              <BiSolidRightArrow className="absolute -right-12 lg:block hidden" />
-              <BiSolidLeftArrow className=" absolute lg:-left-12 md:-left-8 -left-5 lg:hidden block" />
+              {/* <BiSolidRightArrow className="absolute -right-12 lg:block hidden" />
+              <BiSolidLeftArrow className=" absolute lg:-left-12 md:-left-8 -left-5 lg:hidden block" /> */}
               Phase Two
             </h3>
-            <p className="xl:text-base text-sm xl:pl-16 lg:pl-6">
+            <p className="xl:text-base text-sm xl:pl-16 lg:pl-6 text-justify">
               During this phase we will create Sustainable Developments from the
               ground up in secure highly profitable markets such as the UAE.
               During this phase reward payouts will produce up to 100% returns.
@@ -158,10 +158,10 @@ const RoadMap: React.FC = () => {
           </OnScrollView>
           <OnScrollViewHorizontal className="lg:w-1/2 w-[90%] lg:mb-0 mb-6">
             <h3 className="lg:text-2xl md:text-xl text-lg text-primary-dark flex justify-start items-center gap-4 font-bold m-0 mb-2 relative">
-              <BiSolidLeftArrow className=" absolute lg:-left-12 md:-left-8 -left-5" />
+              {/* <BiSolidLeftArrow className=" absolute lg:-left-12 md:-left-8 -left-5" /> */}
               Phase Three
             </h3>
-            <p className="xl:text-base text-sm xl:pr-16 lg:pr-6">
+            <p className="xl:text-base text-sm xl:pr-16 lg:pr-6 text-justify">
               Our final and most important phase where we will focus on creating
               developments that will merge between luxury real estate and
               providing infrastructure such as energy, shelter and water where
