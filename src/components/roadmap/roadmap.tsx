@@ -51,7 +51,7 @@ const RoadMap: React.FC = () => {
         {/* Progress Bar */}
         <div
           ref={ref}
-          className="absolute lg:left-1/2 md:left-2 left-0 transform -translate-x-1/2 md:w-4 w-3 rounded-md border-[2px] border-gray-200 lg:p-[1px] p-[1px] bg-gray-100 h-full"
+          className="absolute lg:left-1/2 left-2 transform -translate-x-1/2 md:w-4 w-3 rounded-md border-[2px] border-gray-200 lg:p-[1px] p-[1px] bg-gray-100 h-full"
         >
           <div
             className={`inset-0 progressbarBG opacity-100 w-full rounded-md`}
@@ -126,8 +126,8 @@ const RoadMap: React.FC = () => {
               }}
             >
               <span
-                className="text-xs flex items-center justify-center min-w-16 px-1 
-              border-b border-gray-400 gap-1 hover:scale-105 rounded-sm bg-gray-100 text-center
+                className="md:text-xs text-[10px] flex md:flex-row flex-col leading-tight items-center justify-center md:min-w-16 px-1 
+              border-b-2 border-gray-300 md:gap-1 gap-0.5 hover:scale-105 rounded-sm md:bg-gray-100 bg-gray-200 text-center
               hover:bg-primary text-primary hover:text-white-base hover:border-b-transparent shadow-xl transition-all box-content py-1"
               >
                 <strong>{stop.nfts}</strong>NFT
