@@ -125,10 +125,12 @@ const RoadMap: React.FC = () => {
                 transform: "translate(-50%, -50%)",
               }}
             >
-              <span className="text-xs flex items-center justify-center min-w-16 px-1 
-              border-0 border-gray-400 hover:scale-105 rounded-sm bg-gray-100 text-center
-              hover:bg-primary hover:text-white-base hover:border-transparent shadow-xl transition-all box-content py-1">
-                {stop.nfts} NFTs
+              <span
+                className="text-xs flex items-center justify-center min-w-16 px-1 
+              border-b border-gray-400 gap-1 hover:scale-105 rounded-sm bg-gray-100 text-center
+              hover:bg-primary text-primary hover:text-white-base hover:border-b-transparent shadow-xl transition-all box-content py-1"
+              >
+                <strong>{stop.nfts}</strong>NFT
               </span>
             </div>
           ))}
