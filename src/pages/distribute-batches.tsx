@@ -91,7 +91,7 @@ const DistributeBatches: React.FC = () => {
       </div>
       {/* Batch Distribute Section */}
       <div className="relative lg:py-24 py-16">
-        <div className="absolute inset-0 bg-secondary-50 blur-sm z-[-1]"></div>
+        <div className="absolute inset-0 bg-gray-100 blur-sm z-[-1]"></div>
         <div className="container z-10 relative">
           <h2 className="text-left xl:text-5xl lg:text-4xl md:text-3xl text-2xl font-semibold tracking-tight text-primary-dark lg:mb-12 mb-8">
             Batch Distribute
