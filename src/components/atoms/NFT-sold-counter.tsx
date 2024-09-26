@@ -6,8 +6,8 @@ const NFTSoldCounter: React.FC = () => {
   };
 
   const [reward, setReward] = useState<number>(0);
-  const targetReward: number = 2800; // Set your target USDT amount here
-  const toTalNFTsWehave: number = 40000; // Set your target USDT amount here
+  const targetReward: number = 2839; // Set your target USDT amount here
+  const toTalNFTsWehave: string = "40,000"; // Set your target USDT amount here
   const baseIncrementPercentage: number = 0.01; // Base increment as a percentage of the targetReward
   const increment: number = Math.max(
     1,
@@ -40,7 +40,7 @@ const NFTSoldCounter: React.FC = () => {
 
   const formattedReward: string = reward.toLocaleString("en-US", {
     minimumIntegerDigits: 6,
-    useGrouping: false,
+    useGrouping: true,
   });
   return (
     <div>

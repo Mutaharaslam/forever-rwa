@@ -3,7 +3,7 @@ import React from "react";
 const RewardsInfo: React.FC = () => {
   return (
     <section className="relative md:py-32 py-24">
-      <div className="absolute inset-0 bg-gray-100 blur-2xl z-[-1]"></div>
+      <div className="absolute inset-0 bg-white blur-2xl z-[-1]"></div>
       <div className="container xl:px-56 lg:px-44 md:px-24 sm:px-10 px-4 z-10">
         <h3 className="text-center lg:text-2xl md:text-xl text-lg font-bold tracking-tight text-secondary  mb-2">
           100-200% rewards, with a guaranteed minimum of 10% of passive income
