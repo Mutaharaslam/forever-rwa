@@ -8,15 +8,13 @@ import DistributeBatches from "./pages/distribute-batches";
 const App: React.FC = () => {
   return (
     <Router basename="/forever-rwa">
-      <div className="">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/distribute" element={<DistributeBatches />} />
-        </Routes>
-        <Footer />
-      </div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/distribute" element={<DistributeBatches />} />
+      </Routes>
+      <Footer />
     </Router>
   );
 };

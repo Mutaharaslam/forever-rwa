@@ -51,7 +51,7 @@ const RoadMap: React.FC = () => {
         {/* Progress Bar */}
         <div
           ref={ref}
-          className="absolute lg:left-1/2 md:left-2 left-0 transform -translate-x-1/2 md:w-4 w-3 rounded-md border-[1px] border-secondary-50 lg:p-[2px] p-[1px] bg-secondary-50 h-full"
+          className="absolute lg:left-1/2 md:left-2 left-0 transform -translate-x-1/2 md:w-4 w-3 rounded-md border-[2px] border-gray-200 lg:p-[1px] p-[1px] bg-gray-100 h-full"
         >
           <div
             className={`inset-0 progressbarBG opacity-100 w-full rounded-md`}
@@ -69,7 +69,7 @@ const RoadMap: React.FC = () => {
           </div>
           {/* Progress Stops at specific percentages */}
 
-          {[
+          {/* {[
             { percent: 2, nfts: 22, placement: "left" },
             { percent: 38, nfts: 4232, placement: "right" },
             { percent: 76, nfts: 7832, placement: "left" },
@@ -86,7 +86,6 @@ const RoadMap: React.FC = () => {
                 transform: "translate(0, -50%)",
               }}
             >
-              {" "}
               {stop.placement === "left" ? (
                 <div className="flex justify-start items-center gap-1.5 font-bold">
                   <TbArrowBigLeftLinesFilled
@@ -108,6 +107,29 @@ const RoadMap: React.FC = () => {
                   />
                 </div>
               )}
+            </div>
+          ))} */}
+
+          {[
+            { percent: 2, nfts: 100, placement: "left" },
+            { percent: 38, nfts: 5232, placement: "right" },
+            { percent: 76, nfts: 8832, placement: "left" },
+            { percent: 95, nfts: 44232, placement: "left" },
+          ].map((stop) => (
+            <div
+              key={stop.percent}
+              className="absolute -translate-y-1 rounded-full
+             left-1/2 font-medium font-sans"
+              style={{
+                top: `${stop.percent}%`,
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <span className="text-xs flex items-center justify-center min-w-16 px-1 
+              border-0 border-gray-400 hover:scale-105 rounded-sm bg-gray-100 text-center
+              hover:bg-primary hover:text-white-base hover:border-transparent shadow-xl transition-all box-content py-1">
+                {stop.nfts} NFTs
+              </span>
             </div>
           ))}
         </div>
