@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import RewardCounter from "../components/reward-counter/reward-counter";
-import Counter from "../components/atoms/counter";
 import NFTSoldCounter from "../components/atoms/NFT-sold-counter";
 
 const DistributeBatches: React.FC = () => {
