@@ -111,10 +111,10 @@ const RoadMap: React.FC = () => {
           ))} */}
 
           {[
-            { percent: 2, nfts: 100, placement: "left" },
-            { percent: 38, nfts: 5232, placement: "right" },
-            { percent: 76, nfts: 8832, placement: "left" },
-            { percent: 95, nfts: 44232, placement: "left" },
+            { percent: 2, nfts: 100 },
+            { percent: 38, nfts: 5232 },
+            { percent: 76, nfts: 8832 },
+            { percent: 95, nfts: 44232 },
           ].map((stop) => (
             <div
               key={stop.percent}
