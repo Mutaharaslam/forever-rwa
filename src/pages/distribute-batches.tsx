@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import RewardCounter from "../components/reward-counter/reward-counter";
+import Counter from "../components/atoms/counter";
+import NFTSoldCounter from "../components/atoms/NFT-sold-counter";
 
 const DistributeBatches: React.FC = () => {
   const [totalAwardAmount, setTotalAwardAmount] = useState("");
@@ -55,6 +58,14 @@ const DistributeBatches: React.FC = () => {
 
   return (
     <section className="mx-auto pt-48 xl:pt-64 xl:py-32 py-24">
+      <div className="container pb-24">
+        <div className="flex items-center flex-col justify-center">
+          <h1 className="text-center lg:text-3xl md:text-2xl text-xl font-semibold tracking-tight text-primary-dark mb-5">
+            Total NFTs Sold
+          </h1>
+          <NFTSoldCounter />
+        </div>
+      </div>
       {/* Distribute Rewards Section */}
       <div className="lg:pb-24 pb-16">
         <div className="container">
