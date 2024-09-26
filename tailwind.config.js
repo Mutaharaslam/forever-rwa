@@ -21,8 +21,8 @@ module.exports = {
     },
     fontFamily: {
       inter: ["Inter", "sans-serif"],
-      sans: ["Montserrat", "sans-serif"],
-      serif: ["Merriweather", "serif"],
+      sans: "var(--secondary-font-family)",
+      serif: "var(--primary-font-family)",
     },
     fontWeight: {
       light: 300,

@@ -46,7 +46,7 @@ const Banner: React.FC = () => {
                 </div>
               </li>
             </ul>
-            <p className="text-base leading-6 text-secondary font-light xl:pr-20 lg:pr-16 pr-0 m-0">
+            <p className="text-base leading-6 text-gray font-light xl:pr-20 lg:pr-16 pr-0 m-0">
               As developers and contractors, we believe in the power of real
               estate to make a difference for those in need whether it is by
               providing electricity facilitating healthcare and education or

@@ -144,7 +144,7 @@ const RoadMap: React.FC = () => {
               {/* <BiSolidLeftArrow className=" absolute lg:-left-12 md:-left-8 -left-5" /> */}
               Phase One
             </h3>
-            <p className="xl:text-base text-sm xl:pr-16 lg:pr-6 text-justify">
+            <p className="xl:text-base text-sm font-light xl:pr-16 lg:pr-6 text-justify">
               During this phase we guarantee a minimum of 10% rewards
               distributed on a quarterly basis.
             </p>
@@ -162,7 +162,7 @@ const RoadMap: React.FC = () => {
               <BiSolidLeftArrow className=" absolute lg:-left-12 md:-left-8 -left-5 lg:hidden block" /> */}
               Phase Two
             </h3>
-            <p className="xl:text-base text-sm xl:pl-16 lg:pl-6 text-justify">
+            <p className="xl:text-base text-sm font-light xl:pl-16 lg:pl-6 text-justify">
               During this phase we will create Sustainable Developments from the
               ground up in secure highly profitable markets such as the UAE.
               During this phase reward payouts will produce up to 100% returns.
@@ -183,7 +183,7 @@ const RoadMap: React.FC = () => {
               {/* <BiSolidLeftArrow className=" absolute lg:-left-12 md:-left-8 -left-5" /> */}
               Phase Three
             </h3>
-            <p className="xl:text-base text-sm xl:pr-16 lg:pr-6 text-justify">
+            <p className="xl:text-base text-sm font-light xl:pr-16 lg:pr-6 text-justify">
               Our final and most important phase where we will focus on creating
               developments that will merge between luxury real estate and
               providing infrastructure such as energy, shelter and water where
