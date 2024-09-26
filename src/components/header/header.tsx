@@ -8,6 +8,8 @@ import { IoClose } from "react-icons/io5";
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -46,6 +48,12 @@ const Header: React.FC = () => {
     } else {
       navigate(href);
     }
+  };
+
+  const handleConnectWallet = () => {
+    // This is where the backend logic to connect the wallet would go.
+    // Once the wallet is connected, we update the state to reflect that.
+    setIsConnected(true);
   };
 
   return (
@@ -106,6 +114,7 @@ const Header: React.FC = () => {
             )}
 
             <button
+              onClick={handleConnectWallet}
               className={`${
                 isScrolled
                   ? "py-1.5 text-sm font-medium"
@@ -115,13 +124,16 @@ const Header: React.FC = () => {
             shadow-sm hover:bg-transparent hover:border-primary`}
             >
               <IoWalletOutline className="text-2xl group-hover:scale-110" />
-              <span className="ml-2 select-none">Connect Wallet</span>
+              <span className="ml-2 select-none">
+                {isConnected ? "Mint" : "Connect Wallet"}
+              </span>
             </button>
           </div>
 
           {/* Mobile Menu Button */}
           {location.pathname === "/distribute" ? (
             <button
+              onClick={handleConnectWallet}
               className={`${
                 isScrolled
                   ? "py-1.5 text-sm font-medium"
@@ -131,7 +143,9 @@ const Header: React.FC = () => {
           shadow-sm hover:bg-transparent hover:border-primary`}
             >
               <IoWalletOutline className="text-2xl group-hover:scale-110" />
-              <span className="ml-2 select-none">Connect</span>
+              <span className="ml-2 select-none">
+                {isConnected ? "Mint" : "Connect Wallet"}
+              </span>
             </button>
           ) : (
             <button
@@ -161,6 +175,7 @@ const Header: React.FC = () => {
             </span>
           ))}
           <button
+            onClick={handleConnectWallet}
             className="mt-3 w-full flex items-center justify-center cursor-pointer
            scale-1 hover:text-primary-700 transition-all group rounded-md bg-primary 
            border border-primary-700 px-3.5 py-2.5 text-sm font-semibold 
@@ -168,7 +183,7 @@ const Header: React.FC = () => {
           >
             <IoWalletOutline className="text-2xl group-hover:scale-110" />
             <span className="ml-2 text-base font-semibold select-none">
-              Connect Wallet
+              {isConnected ? "Mint" : "Connect Wallet"}
             </span>
           </button>
         </div>
