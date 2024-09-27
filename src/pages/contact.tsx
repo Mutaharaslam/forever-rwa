@@ -1,7 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import Divider from "../components/divider/divider";
+import emailjs from 'emailjs-com';
 
 const ContactUs: React.FC = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    tel: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Service, Template, and User IDs from EmailJS
+    const serviceID = "your_service_id";
+    const templateID = "your_template_id";
+    const userID = "your_user_id";
+
+    // Send the message to site admin
+    emailjs.send(serviceID, templateID, formData, userID).then(
+      (result) => {
+        console.log(result.text);
+        alert("Message sent successfully!");
+      },
+      (error) => {
+        console.log(error.text);
+        alert("Failed to send message.");
+      }
+    );
+
+    // Send thank you message to the user
+    const thankYouTemplateID = "your_thank_you_template_id";
+    emailjs
+      .send(
+        serviceID,
+        thankYouTemplateID,
+        { user_email: formData.email, user_name: formData.name },
+        userID
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          alert("Thank you email sent successfully!");
+        },
+        (error) => {
+          console.log(error.text);
+          alert("Failed to send thank you email.");
+        }
+      );
+
+    // Clear form
+    setFormData({ name: "", email: "", tel: "", message: "" });
+  };
   return (
     <>
       <section className="container mx-auto pt-48 xl:pt-64 xl:py-32 py-24">
@@ -107,7 +165,10 @@ const ContactUs: React.FC = () => {
             </nav>
           </div>
           {/* Right */}
-          <form className=" p-8 px-6 rounded-xl w-full md:basis-2/4 basis-full shadow-2xl bg-white-base border-secondary-100 border">
+          <form
+            className="p-8 px-6 rounded-xl w-full md:basis-2/4 basis-full shadow-2xl bg-white-base border-secondary-100 border"
+            onSubmit={sendEmail}
+          >
             <div className="mb-4">
               <label
                 className="block text-sm font-semibold mb-1"
@@ -121,6 +182,8 @@ const ContactUs: React.FC = () => {
                 id="name"
                 required
                 placeholder="Enter your name"
+                value={formData.name}
+                onChange={handleChange}
               />
             </div>
 
@@ -132,11 +195,13 @@ const ContactUs: React.FC = () => {
                 Email
               </label>
               <input
-                className="border border-gray-300 rounded-md p-3 w-full placeholder-  focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                 type="email"
                 id="email"
                 required
                 placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
               />
             </div>
 
@@ -149,7 +214,9 @@ const ContactUs: React.FC = () => {
                 type="tel"
                 id="tel"
                 required
-                placeholder="Enter your name"
+                placeholder="Enter your phone"
+                value={formData.tel}
+                onChange={handleChange}
               />
             </div>
 
@@ -166,6 +233,8 @@ const ContactUs: React.FC = () => {
                 rows={5}
                 required
                 placeholder="Type your message here"
+                value={formData.message}
+                onChange={handleChange}
               ></textarea>
             </div>
 
