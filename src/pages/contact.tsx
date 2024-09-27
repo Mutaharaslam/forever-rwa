@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Divider from "../components/divider/divider";
-import emailjs from 'emailjs-com';
 
 const ContactUs: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -17,47 +16,33 @@ const ContactUs: React.FC = () => {
     setFormData({ ...formData, [id]: value });
   };
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Service, Template, and User IDs from EmailJS
-    const serviceID = "your_service_id";
-    const templateID = "your_template_id";
-    const userID = "your_user_id";
-
-    // Send the message to site admin
-    emailjs.send(serviceID, templateID, formData, userID).then(
-      (result) => {
-        console.log(result.text);
-        alert("Message sent successfully!");
-      },
-      (error) => {
-        console.log(error.text);
-        alert("Failed to send message.");
-      }
-    );
-
-    // Send thank you message to the user
-    const thankYouTemplateID = "your_thank_you_template_id";
-    emailjs
-      .send(
-        serviceID,
-        thankYouTemplateID,
-        { user_email: formData.email, user_name: formData.name },
-        userID
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          alert("Thank you email sent successfully!");
-        },
-        (error) => {
-          console.log(error.text);
-          alert("Failed to send thank you email.");
+    try {
+      const response = await fetch(
+        "https://forever-backend-blond.vercel.app/send",
+        {
+          // Use your Vercel backend URL here
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         }
       );
 
-    // Clear form
+      if (response.ok) {
+        alert("Message sent successfully!");
+      } else {
+        alert("Failed to send message.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while sending the message.");
+    }
+
+    // Reset form fields after submission
     setFormData({ name: "", email: "", tel: "", message: "" });
   };
   return (
@@ -167,7 +152,7 @@ const ContactUs: React.FC = () => {
           {/* Right */}
           <form
             className="p-8 px-6 rounded-xl w-full md:basis-2/4 basis-full shadow-2xl bg-white-base border-secondary-100 border"
-            onSubmit={sendEmail}
+            onSubmit={handleSubmit}
           >
             <div className="mb-4">
               <label
