@@ -4,12 +4,49 @@ import bannerImage from "../../assets/images/banner-img-min.png";
 // import { MdGraphicEq } from "react-icons/md";
 import OnScrollViewHorizontal from "../atoms/onScrollviewHosrizontal";
 import { FaDotCircle } from "react-icons/fa";
+import { contract } from "../../constants";
+import { useReadContract, useActiveAccount } from "thirdweb/react";
+import { ethers } from "ethers";
+import {
+  prepareContractCall,
+  sendAndConfirmTransaction,
+} from "thirdweb";
 
 const Banner: React.FC = () => {
+  const account = useActiveAccount();
+
+  const { data, isLoading } = useReadContract({
+    contract,
+    method: "function mintPrice() returns (uint256)",
+    params: [],
+  });
+
+  const handleMint = async () => {
+    if (account) {
+      try {
+        const transaction = prepareContractCall({
+          contract,
+          method: "function mintNFT()",
+          params: [],
+          value: data,
+        });
+        await sendAndConfirmTransaction({
+          account,
+          transaction,
+        });
+        window.alert("Successfully Minted");
+      } catch (err: any) {
+        window.alert(err.message);
+      }
+    }
+  };
+
   return (
     <section className="bg-transparent container mx-auto">
-      <div className="lg:px-1 relative isolate flex md:flex-row flex-col items-center 
-      pb-16 md:pb-24 lg:pb-32 xl:pb-40 pt-48 xl:pt-64 xl:gap-32 lg:gap-24 gap-16">
+      <div
+        className="lg:px-1 relative isolate flex md:flex-row flex-col items-center 
+      pb-16 md:pb-24 lg:pb-32 xl:pb-40 pt-48 xl:pt-64 xl:gap-32 lg:gap-24 gap-16"
+      >
         {/* designs */}
         <div
           aria-hidden="true"
@@ -55,12 +92,17 @@ const Banner: React.FC = () => {
               while creating value for everyone involved.
             </p>
             <div className="mt-6 flex items-center justify-start gap-x-6">
-              <a
-                href="/"
+              <button
+                onClick={() => handleMint()}
+                disabled={account && account.address ? false : true}
                 className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Connect Wallet
-              </a>
+                {account && account.address
+                  ? `Mint for ${
+                      isLoading ? 0 : ethers.formatEther(data || 0)
+                    } MATIC`
+                  : "Connect Wallet to Mint"}
+              </button>
               <a
                 href="#learnmore"
                 className="text-sm font-semibold leading-6 text-primary"

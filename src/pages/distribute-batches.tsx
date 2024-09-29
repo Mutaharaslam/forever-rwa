@@ -1,16 +1,35 @@
 import React, { useState } from "react";
 import NFTSoldCounter from "../components/atoms/NFT-sold-counter";
+import {
+  contract,
+  contractAddress,
+  tokenContract,
+  client,
+  chain,
+} from "../constants";
+import { useActiveAccount, useReadContract } from "thirdweb/react";
+import { ethers } from "ethers";
+import { prepareContractCall, sendAndConfirmTransaction } from "thirdweb";
 
 const DistributeBatches: React.FC = () => {
+  const account = useActiveAccount();
+
+  const { data: totalSupply, isLoading: loading1 } = useReadContract({
+    contract,
+    method: "function totalSupply() returns (uint256)",
+    params: [],
+  });
+
   const [totalAwardAmount, setTotalAwardAmount] = useState("");
   const [totalAmount, setTotalAmount] = useState("");
   const [batchSize, setBatchSize] = useState("");
+  const [NFTID, setNFTID] = useState("1");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [batchSuccessMessage, setBatchSuccessMessage] = useState("");
   const [batchErrorMessage, setBatchErrorMessage] = useState("");
 
-  const handleAwardDistribute = () => {
+  const handleAwardDistribute = async () => {
     if (
       !totalAwardAmount ||
       isNaN(Number(totalAwardAmount)) ||
@@ -21,13 +40,47 @@ const DistributeBatches: React.FC = () => {
       return;
     }
 
+    if (account) {
+      try {
+        setSuccessMessage("Processing...");
+        const tokenAmount = ethers.parseUnits(totalAwardAmount, 6);
+        const transaction = prepareContractCall({
+          contract: tokenContract,
+          method: "function approve(address spender, uint256 value)",
+          params: [contractAddress, tokenAmount],
+        });
+        await sendAndConfirmTransaction({
+          account,
+          transaction,
+        });
+        setSuccessMessage("Processing...");
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+        const transaction2 = prepareContractCall({
+          contract,
+          method: "function distributeRewards(uint256 rewardAmount)",
+          params: [tokenAmount],
+        });
+        await sendAndConfirmTransaction({
+          account,
+          transaction: transaction2,
+        });
+        setSuccessMessage("");
+        window.alert("Successfully Distributed");
+      } catch (err: any) {
+        setSuccessMessage("");
+        console.log(err);
+        window.alert(err.message);
+      }
+    } else {
+      setErrorMessage("Please connect your wallet");
+    }
     // Simulate success
-    setSuccessMessage("Successfully distributed rewards to all.");
+    // setSuccessMessage("Successfully distributed rewards to all.");
     setErrorMessage("");
     console.log("Distributing:", totalAwardAmount);
   };
 
-  const handleBatchDistribute = () => {
+  const handleBatchDistribute = async () => {
     if (
       !totalAmount ||
       isNaN(Number(totalAmount)) ||
@@ -43,8 +96,55 @@ const DistributeBatches: React.FC = () => {
       return;
     }
 
+    if (account) {
+      try {
+        setBatchSuccessMessage("Processing...");
+        const tokenAmount = ethers.parseUnits(totalAmount, 6);
+        const transaction = prepareContractCall({
+          contract: tokenContract,
+          method: "function approve(address spender, uint256 value)",
+          params: [contractAddress, tokenAmount],
+        });
+        await sendAndConfirmTransaction({
+          account,
+          transaction,
+        });
+        setBatchSuccessMessage("Processing...");
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+        const startId = parseInt(NFTID);
+        const totalSold = parseInt(ethers.formatUnits(totalSupply || 0, 0));
+        const increment = parseInt(batchSize);
+        let i = startId;
+        while (i < totalSold) {
+          const transaction2 = prepareContractCall({
+            contract,
+            method:
+              "function batchDistributeRewards(uint256 rewardAmount, uint256 startTokenId, uint256 endTokenId)",
+            params: [
+              tokenAmount,
+              ethers.parseUnits(`${i}`, 0),
+              ethers.parseUnits(`${Math.min(totalSold, i + increment - 1)}`, 0),
+            ],
+          });
+          await sendAndConfirmTransaction({
+            account,
+            transaction: transaction2,
+          });
+          await new Promise((resolve) => setTimeout(resolve, 5000));
+          i += increment;
+        }
+        setBatchSuccessMessage("");
+        window.alert("Successfully Distributed");
+      } catch (err: any) {
+        setBatchSuccessMessage("");
+        console.log(err);
+        window.alert(err.message);
+      }
+    } else {
+      setBatchErrorMessage("Please connect your wallet");
+    }
     // Simulate success
-    setBatchSuccessMessage("Successfully batch distributed rewards.");
+    // setBatchSuccessMessage("Successfully batch distributed rewards.");
     setBatchErrorMessage("");
     console.log(
       "Batch distributing:",
@@ -136,6 +236,19 @@ const DistributeBatches: React.FC = () => {
                 onChange={(e) => setBatchSize(e.target.value)}
                 className="border border-gray-300 rounded-md p-2 w-full"
                 placeholder="Enter batch size"
+              />
+            </div>
+            <div className="mb-4 lg:max-w-xs max-w-full w-full">
+              <label className="block text-sm font-medium mb-2" htmlFor="nftid">
+                Start NFT ID (optional)
+              </label>
+              <input
+                type="number"
+                id="nftid"
+                value={NFTID}
+                onChange={(e) => setNFTID(e.target.value)}
+                className="border border-gray-300 rounded-md p-2 w-full"
+                placeholder="Enter First NFT ID (optional)"
               />
             </div>
           </div>

@@ -5,11 +5,14 @@ import logo from "../../assets/images/logo.png";
 import { IoMdMenu } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 
+import { ConnectButton, lightTheme } from "thirdweb/react";
+
+import { client, chain } from "../../constants";
+
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isConnected, setIsConnected] = useState(false);
-
+  
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -48,12 +51,6 @@ const Header: React.FC = () => {
     } else {
       navigate(href);
     }
-  };
-
-  const handleConnectWallet = () => {
-    // This is where the backend logic to connect the wallet would go.
-    // Once the wallet is connected, we update the state to reflect that.
-    setIsConnected(true);
   };
 
   return (
@@ -113,7 +110,19 @@ const Header: React.FC = () => {
               </>
             )}
 
-            <button
+            <ConnectButton
+              client={client}
+              chain={chain}
+              connectButton={{
+                label: "Connect Wallet",
+              }}
+              theme={lightTheme({
+                colors: {
+                  primaryButtonBg: "var(--primary)",
+                },
+              })}
+            />
+            {/* <button
               onClick={handleConnectWallet}
               className={`${
                 isScrolled
@@ -127,26 +136,39 @@ const Header: React.FC = () => {
               <span className="ml-2 select-none">
                 {isConnected ? "Mint" : "Connect Wallet"}
               </span>
-            </button>
+            </button> */}
           </div>
 
           {/* Mobile Menu Button */}
           {location.pathname === "/distribute" ? (
-            <button
-              onClick={handleConnectWallet}
-              className={`${
-                isScrolled
-                  ? "py-1.5 text-sm font-medium"
-                  : "py-2.5 text-base font-semibold"
-              } xl:ml-6 ml-4 flex lg:hidden items-center cursor-pointer text-white scale-1 hover:text-primary
-           transition-all group rounded-md bg-primary border border-primary px-3.5 
-          shadow-sm hover:bg-transparent hover:border-primary`}
-            >
-              <IoWalletOutline className="text-2xl group-hover:scale-110" />
-              <span className="ml-2 select-none">
-                {isConnected ? "Mint" : "Connect Wallet"}
-              </span>
-            </button>
+            //   <button
+            //     onClick={handleConnectWallet}
+            //     className={`${
+            //       isScrolled
+            //         ? "py-1.5 text-sm font-medium"
+            //         : "py-2.5 text-base font-semibold"
+            //     } xl:ml-6 ml-4 flex lg:hidden items-center cursor-pointer text-white scale-1 hover:text-primary
+            //  transition-all group rounded-md bg-primary border border-primary px-3.5
+            // shadow-sm hover:bg-transparent hover:border-primary`}
+            //   >
+            //     <IoWalletOutline className="text-2xl group-hover:scale-110" />
+            //     <span className="ml-2 select-none">
+            //       {isConnected ? "Mint" : "Connect Wallet"}
+            //     </span>
+            //   </button>
+            // <ConnectButton
+            //   client={client}
+            //   chain={chain}
+            //   connectButton={{
+            //     label: "Connect Wallet",
+            //   }}
+            //   theme={lightTheme({
+            //     colors: {
+            //       primaryButtonBg: "var(--primary)",
+            //     },
+            //   })}
+            // />
+            <></>
           ) : (
             <button
               className="lg:hidden text-primary focus:outline-none text-4xl"
@@ -174,7 +196,7 @@ const Header: React.FC = () => {
               {name}
             </span>
           ))}
-          <button
+          {/* <button
             onClick={handleConnectWallet}
             className="mt-3 w-full flex items-center justify-center cursor-pointer
            scale-1 hover:text-primary-700 transition-all group rounded-md bg-primary 
@@ -185,7 +207,19 @@ const Header: React.FC = () => {
             <span className="ml-2 text-base font-semibold select-none">
               {isConnected ? "Mint" : "Connect Wallet"}
             </span>
-          </button>
+          </button> */}
+          <ConnectButton
+            client={client}
+            chain={chain}
+            connectButton={{
+              label: "Connect Wallet",
+            }}
+            theme={lightTheme({
+              colors: {
+                primaryButtonBg: "var(--primary)",
+              },
+            })}
+          />
         </div>
       )}
     </header>

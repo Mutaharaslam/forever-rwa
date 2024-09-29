@@ -1,19 +1,38 @@
 import React, { useEffect, useState } from "react";
+import { contract } from "../../constants";
+import { useReadContract } from "thirdweb/react";
+import { ethers } from "ethers";
 
 const NFTSoldCounter: React.FC = () => {
+  const { data: totalSupply, isLoading: loading1 } = useReadContract({
+    contract,
+    method: "function totalSupply() returns (uint256)",
+    params: [],
+  });
+  const { data: maxSupply, isLoading: loading2 } = useReadContract({
+    contract,
+    method: "function maxSupply() returns (uint256)",
+    params: [],
+  });
+
   const easeInOutQuad = (t: number): number => {
     return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
   };
 
   const [reward, setReward] = useState<number>(0);
-  const targetReward: number = 2839; // Set your target USDT amount here
-  const toTalNFTsWehave: string = "40,000"; // Set your target USDT amount here
+  const [targetReward, setTargetReward] = useState(0);
+  const [totalNFTsWehave, setTotalNFTsWeHave] = useState("0");
   const baseIncrementPercentage: number = 0.01; // Base increment as a percentage of the targetReward
   const increment: number = Math.max(
     1,
     Math.floor(targetReward * baseIncrementPercentage)
   ); // Calculate increment based on targetReward
   const duration: number = (targetReward / increment) * 50; // Duration in milliseconds
+
+  useEffect(() => {
+    setTargetReward(parseInt(ethers.formatUnits(totalSupply || 0, 0)));
+    setTotalNFTsWeHave(ethers.formatUnits(maxSupply || 0, 0));
+  }, [totalSupply, maxSupply]);
 
   useEffect(() => {
     let animationFrameId: number;
@@ -61,7 +80,7 @@ const NFTSoldCounter: React.FC = () => {
             </div>
           ))}
         <div className="lg:mt-1 sm:w-auto w-full font-semibold font-sans md:text-xl sm:text-lg text-base text-white">
-          <span className="text-sm">Out of</span> {toTalNFTsWehave}
+          <span className="text-sm">Out of</span> {totalNFTsWehave}
         </div>
       </div>
     </div>

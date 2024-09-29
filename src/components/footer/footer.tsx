@@ -1,8 +1,18 @@
 import React from "react";
 import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
+import { contract } from "../../constants";
+import { useReadContract, useActiveAccount } from "thirdweb/react";
 
 const Footer: React.FC = () => {
+  const account = useActiveAccount();
+
+  const { data, isLoading } = useReadContract({
+    contract,
+    method: "function owner() returns (address)",
+    params: [],
+  });
+
   return (
     <footer className="bg-transparent text-white py-6 w-full ">
       <div className="flex items-start justify-center mb-4">
@@ -16,9 +26,16 @@ const Footer: React.FC = () => {
           </p>
         </div>
         <div className="flex space-x-4 text-primary">
-          <Link to="/distribute" className="hover:text-secondary-400">
-            Distribute Batch
-          </Link>
+          {!isLoading &&
+            data &&
+            account &&
+            account.address &&
+            account.address &&
+            data.toLowerCase() === account.address.toLowerCase() && (
+              <Link to="/distribute" className="hover:text-secondary-400">
+                Distribute Rewards
+              </Link>
+            )}
           <Link to="/" className="hover:text-secondary-400">
             Privacy Policy
           </Link>

@@ -6,8 +6,23 @@ import Image5 from "../../assets/images/img5.jpg";
 import OnScrollViewHorizontal from "../atoms/onScrollviewHosrizontal";
 import OnScrollView from "../atoms/onScrollview";
 import { useInView } from "react-intersection-observer"; // Make sure to install this package
+import { contract } from "../../constants";
+import { useReadContract } from "thirdweb/react";
+import { ethers } from "ethers";
 
 const RoadMap: React.FC = () => {
+  const { data: totalSupply, isLoading: loading1 } = useReadContract({
+    contract,
+    method: "function totalSupply() returns (uint256)",
+    params: [],
+  });
+  const { data: maxSupply, isLoading: loading2 } = useReadContract({
+    contract,
+    method: "function maxSupply() returns (uint256)",
+    params: [],
+  });
+
+  const [targetProgress, setTargetProgress] = useState(0);
   const [progress, setProgress] = useState(0); // Start at 0
   const { ref, inView } = useInView({
     triggerOnce: true, // Trigger only once
@@ -15,8 +30,14 @@ const RoadMap: React.FC = () => {
   });
 
   useEffect(() => {
+    setTargetProgress(
+      parseFloat(ethers.formatEther(totalSupply || 0)) /
+        parseFloat(ethers.formatEther(maxSupply || 0))
+    );
+  }, [totalSupply, maxSupply]);
+
+  useEffect(() => {
     if (inView) {
-      const targetProgress = 79; // Target progress value
       const baseDurationPerPercent = 50; // 30 milliseconds per percentage
       const duration = targetProgress * baseDurationPerPercent; // Total duration in ms
       const stepTime = 5; // Update interval (smoothness of the progress)
@@ -27,7 +48,7 @@ const RoadMap: React.FC = () => {
           const newProgress = prevProgress + increment;
           if (newProgress >= targetProgress) {
             clearInterval(progressInterval);
-            return targetProgress; 
+            return targetProgress;
           }
           return newProgress;
         });
@@ -36,7 +57,7 @@ const RoadMap: React.FC = () => {
       return () => clearInterval(progressInterval);
     }
   }, [inView]);
-// Progress Stepps 
+  // Progress Stepps
   const defaultStops = [
     { percent: 0.1, nfts: 0, placement: "right" },
     { percent: 33, nfts: 6000, placement: "left" },

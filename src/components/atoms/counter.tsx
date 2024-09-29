@@ -1,18 +1,33 @@
 import React, { useEffect, useState } from "react";
+import { contract } from "../../constants";
+import { useReadContract } from "thirdweb/react";
+import { ethers } from "ethers";
 
 const Counter: React.FC = () => {
+  const [targetReward, setTargetReward] = useState(0);
+  const { data } = useReadContract({
+    contract,
+    method: "function totalUSDTRewardsDistributed() returns (uint256)",
+    params: [],
+  });
+
   const easeInOutQuad = (t: number): number => {
     return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
   };
 
   const [reward, setReward] = useState<number>(0);
-  const targetReward: number = 8499872; // Set your target USDT amount here
   const baseIncrementPercentage: number = 0.01; // Base increment as a percentage of the targetReward
   const increment: number = Math.max(
     1,
     Math.floor(targetReward * baseIncrementPercentage)
   ); // Calculate increment based on targetReward
   const duration: number = (targetReward / increment) * 50; // Duration in milliseconds
+
+  useEffect(() => {
+    if (data) {
+      setTargetReward(parseInt(ethers.formatUnits(data, 6)));
+    }
+  }, [data])
 
   useEffect(() => {
     let animationFrameId: number;
