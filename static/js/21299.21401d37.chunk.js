@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkforever_rwa=self.webpackChunkforever_rwa||[]).push([[21299],{21299:(e,r,c)=>{function u(e){return`0x${e.reduce(((e,r)=>e+r.replace("0x","")),"")}`}c.r(r),c.d(r,{concatHex:()=>u})}}]);
+//# sourceMappingURL=21299.21401d37.chunk.js.map

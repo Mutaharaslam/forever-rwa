@@ -1,0 +1,1 @@
+(self.webpackChunkforever_rwa=self.webpackChunkforever_rwa||[]).push([[84147],{15340:()=>{},79838:()=>{}}]);

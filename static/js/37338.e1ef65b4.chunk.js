@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkforever_rwa=self.webpackChunkforever_rwa||[]).push([[37338],{37338:(e,r,a)=>{a.r(r),a.d(r,{eth_getTransactionCount:()=>t});var n=a(3340);async function t(e,r){const a=await e({method:"eth_getTransactionCount",params:[r.address,r.blockNumber?(0,n.cK)(r.blockNumber):r.blockTag||"pending"]});return(0,n.ME)(a)}}}]);
+//# sourceMappingURL=37338.e1ef65b4.chunk.js.map

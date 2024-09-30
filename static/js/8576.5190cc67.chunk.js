@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkforever_rwa=self.webpackChunkforever_rwa||[]).push([[8576],{79578:(r,c,e)=>{e.d(c,{rr:()=>o});var a=e(86511);const t="0x313ce567",n=[],s=[{type:"uint8"}];async function o(r){return(0,a.readContract)({contract:r.contract,method:[t,n,s],params:[]})}},8576:(r,c,e)=>{e.d(c,{decimals:()=>n});var a=e(27059),t=e(79578);async function n(r){return(0,a.n)((()=>(0,t.rr)(r)),{cacheKey:`${r.contract.chain.id}:${r.contract.address}:decimals`,cacheTime:Number.POSITIVE_INFINITY})}}}]);
+//# sourceMappingURL=8576.5190cc67.chunk.js.map
