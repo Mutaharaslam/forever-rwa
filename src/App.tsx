@@ -1,17 +1,17 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Homepage from "./pages/home";
-import Contact from "./pages/contact";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/header/header";
-import Footer from "./components/footer/footer";
+import Homepage from "./pages/home";
+import ContactUs from "./pages/contact";
 import DistributeBatches from "./pages/distribute-batches";
+import Footer from "./components/footer/footer";
 
 const App: React.FC = () => {
   return (
-    <Router basename="/forever-rwa">
+    <Router>
       <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/distribute" element={<DistributeBatches />} />
       </Routes>
       <Footer />

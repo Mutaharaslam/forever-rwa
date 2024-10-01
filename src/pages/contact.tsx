@@ -19,18 +19,19 @@ const ContactUs: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Create a FormData object to send form data via POST
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("tel", formData.tel);
+    formDataToSend.append("message", formData.message);
+
     try {
-      const response = await fetch(
-        "https://forever-backend-blond.vercel.app/send",
-        {
-          // Use your Vercel backend URL here
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("/contact.php", {
+        // Use the relative path to your PHP file on GoDaddy
+        method: "POST",
+        body: formDataToSend, // Send as FormData
+      });
 
       if (response.ok) {
         alert("Message sent successfully!");
