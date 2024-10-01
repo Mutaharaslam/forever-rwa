@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkforever_rwa=self.webpackChunkforever_rwa||[]).push([[67143],{67143:(e,r,n)=>{n.r(r),n.d(r,{hashMessage:()=>c});var s=n(52620),a=n(42002),t=n(44434);const f="\x19Ethereum Signed Message:\n";function c(e,r){const n="string"===typeof e?(0,a.Af)(e):e.raw instanceof Uint8Array?e.raw:(0,a.ZJ)(e.raw),c=(0,a.Af)(`${f}${n.length}`);return(0,t.S)((0,s.xW)([c,n]),r)}}}]);
+//# sourceMappingURL=67143.0f7546f6.chunk.js.map
