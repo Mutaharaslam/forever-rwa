@@ -9,41 +9,42 @@ const ContactUs: React.FC = () => {
     message: "",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const [loading, setLoading] = useState(false); // Loader state
+  const [messageSent, setMessageSent] = useState(""); // Message state
+
+  const handleChange = (e:any) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
+    setLoading(true); // Show loader when form submission starts
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("tel", formData.tel);
+    formDataToSend.append("message", formData.message);
 
     try {
-      const response = await fetch(
-        "https://forever-backend-blond.vercel.app/send",
-        {
-          // Use your Vercel backend URL here
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("/contact.php", {
+        method: "POST",
+        body: formDataToSend,
+      });
 
       if (response.ok) {
-        alert("Message sent successfully!");
+        setMessageSent("Message sent successfully!");
+        setFormData({ name: "", email: "", tel: "", message: "" }); // Reset form fields
       } else {
-        alert("Failed to send message.");
+        setMessageSent("Failed to send message.");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred while sending the message.");
+      setMessageSent("An error occurred while sending the message.");
     }
 
-    // Reset form fields after submission
-    setFormData({ name: "", email: "", tel: "", message: "" });
+    setLoading(false); // Hide loader once the message is sent
   };
   return (
     <>
@@ -225,10 +226,39 @@ const ContactUs: React.FC = () => {
 
             <button
               type="submit"
-              className="bg-primary justify-self-end text-white py-2 px-4 rounded-md transition duration-200 hover:bg-primary-dark"
+              className="bg-primary justify-self-end text-white py-2 px-4 rounded-md transition duration-200 hover:bg-primary-dark flex items-center justify-center"
+              disabled={loading}
             >
-              Send Message
+              {loading ? (
+                <svg
+                  className="animate-spin h-5 w-5 text-white mr-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  ></path>
+                </svg>
+              ) : (
+                "Send Message"
+              )}
             </button>
+
+            {/* Success or failure message */}
+            {messageSent && (
+              <p className="text-green-500 mt-4">{messageSent}</p>
+            )}
           </form>
         </div>
       </section>
