@@ -178,7 +178,7 @@ const Header: React.FC = () => {
                   value={count}
                   onChange={handleChange}
                   min="1"
-                  className="w-10 text-center border rounded-md"
+                  className="w-10 text-center border rounded-md text-black"
                 />
 
                 <button
