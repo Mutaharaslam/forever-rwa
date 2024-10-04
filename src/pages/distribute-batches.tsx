@@ -9,7 +9,10 @@ import {
 } from "../constants";
 import { useActiveAccount, useReadContract } from "thirdweb/react";
 import { ethers } from "ethers";
-import { prepareContractCall, sendAndConfirmTransaction } from "thirdweb";
+import {
+  prepareContractCall,
+  sendAndConfirmTransaction,
+} from "thirdweb";
 
 const DistributeBatches: React.FC = () => {
   const account = useActiveAccount();
@@ -54,7 +57,6 @@ const DistributeBatches: React.FC = () => {
           transaction,
         });
         setSuccessMessage("Processing...");
-        await new Promise((resolve) => setTimeout(resolve, 5000));
         const transaction2 = prepareContractCall({
           contract,
           method: "function distributeRewards(uint256 rewardAmount)",
@@ -105,12 +107,11 @@ const DistributeBatches: React.FC = () => {
           method: "function approve(address spender, uint256 value)",
           params: [contractAddress, tokenAmount],
         });
-        await sendAndConfirmTransaction({
+        sendAndConfirmTransaction({
           account,
           transaction,
         });
         setBatchSuccessMessage("Processing...");
-        await new Promise((resolve) => setTimeout(resolve, 5000));
         const startId = parseInt(NFTID);
         const totalSold = parseInt(ethers.formatUnits(totalSupply || 0, 0));
         const increment = parseInt(batchSize);
@@ -130,7 +131,6 @@ const DistributeBatches: React.FC = () => {
             account,
             transaction: transaction2,
           });
-          await new Promise((resolve) => setTimeout(resolve, 5000));
           i += increment;
         }
         setBatchSuccessMessage("");

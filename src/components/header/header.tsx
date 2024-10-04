@@ -7,11 +7,14 @@ import { IoClose } from "react-icons/io5";
 
 import { ConnectButton, lightTheme } from "thirdweb/react";
 
-import { client, chain } from "../../constants";
+import { client, chain, tokenContract, contractAddress } from "../../constants";
 import { contract } from "../../constants";
 import { useReadContract, useActiveAccount } from "thirdweb/react";
 import { ethers } from "ethers";
-import { prepareContractCall, sendAndConfirmTransaction } from "thirdweb";
+import {
+  prepareContractCall,
+  sendAndConfirmTransaction,
+} from "thirdweb";
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -68,11 +71,23 @@ const Header: React.FC = () => {
   const handleMint = async () => {
     if (account) {
       try {
+        const amount = parseFloat(ethers.formatUnits(data || 0, 6)) * count;
+        const tokenAmount = ethers.parseUnits(`${amount}`, 6);
+
+        const transactionA = prepareContractCall({
+          contract: tokenContract,
+          method: "function approve(address spender, uint256 value)",
+          params: [contractAddress, tokenAmount],
+        });
+        await sendAndConfirmTransaction({
+          account,
+          transaction: transactionA,
+        });
+
         const transaction = prepareContractCall({
           contract,
-          method: "function mintNFT()",
-          params: [],
-          value: data,
+          method: "function mintNFT(uint256 _mintAmount)",
+          params: [ethers.parseUnits(`${count}`, 0)],
         });
         await sendAndConfirmTransaction({
           account,
@@ -200,8 +215,10 @@ const Header: React.FC = () => {
               >
                 {account && account.address
                   ? `Mint ${count} for ${
-                      isLoading ? 0 : ethers.formatEther(data || 0)
-                    } MATIC`
+                      isLoading
+                        ? 0
+                        : count * parseFloat(ethers.formatUnits(data || 0, 6))
+                    } USDT`
                   : " Mint"}
               </button>
             </div>
@@ -306,7 +323,9 @@ const Header: React.FC = () => {
           </button> */}
           <div
             className={`flex items-center rounded-md ${
-              account && account?.address ? "bg-primary px-3" : "transparent px-0"
+              account && account?.address
+                ? "bg-primary px-3"
+                : "transparent px-0"
             }`}
           >
             <div
