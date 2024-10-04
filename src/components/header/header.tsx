@@ -11,10 +11,7 @@ import { client, chain, tokenContract, contractAddress } from "../../constants";
 import { contract } from "../../constants";
 import { useReadContract, useActiveAccount } from "thirdweb/react";
 import { ethers } from "ethers";
-import {
-  prepareContractCall,
-  sendAndConfirmTransaction,
-} from "thirdweb";
+import { prepareContractCall, sendAndConfirmTransaction } from "thirdweb";
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -131,7 +128,7 @@ const Header: React.FC = () => {
         } ${
           isMobileMenuOpen ? "!shadow-none border-transparent" : ""
         } relative mx-auto flex transition-all  
-        py-4 md:px-6 px-4 items-center justify-between rounded-xl container
+        py-4 md:px-6 px-4 items-center justify-between rounded-xl container max-xl:min-w-full
            border border-secondary-50`}
         aria-label="Global"
       >
@@ -210,7 +207,7 @@ const Header: React.FC = () => {
               <button
                 onClick={() => handleMint()} // Pass the count to the mint function
                 disabled={account && account.address ? false : true}
-                className="rounded-md bg-primary-800 ml-3 disabled:bg-slate-300 disabled:text-slate-100 px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline
+                className="rounded-md bg-primary-800 ml-3 disabled:bg-slate-300 disabled:text-slate-100 px-3 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline
                    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 {account && account.address
@@ -335,7 +332,6 @@ const Header: React.FC = () => {
             >
               <button
                 onClick={handleDecrement}
-                // disabled={account && account.address ? false : true}
                 className="text-xl font-semibold text-white p-2 py-[11px]"
               >
                 -
@@ -351,24 +347,22 @@ const Header: React.FC = () => {
 
               <button
                 onClick={handleIncrement}
-                // disabled={account && account.address ? false : true}
                 className="text-xl font-semibold text-white p-2"
               >
                 +
               </button>
-
               <div className="w-[2px] h-8 bg-white"></div>
             </div>
 
             <button
               onClick={() => handleMint()} // Pass the count to the mint function
               disabled={account && account.address ? false : true}
-              className="rounded-md bg-primary-800 md:ml-3 disabled:bg-slate-300 disabled:text-slate-100 px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline
+              className="rounded-md bg-primary-800 ml-3 disabled:bg-slate-300 disabled:text-slate-100 px-3 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline
                    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               {account && account.address
                 ? `Mint ${count} for ${
-                    isLoading ? 0 : ethers.formatEther(data || 0)
+                    count * parseFloat(ethers.formatUnits(data || 0, 6))
                   } MATIC`
                 : " Mint"}
             </button>
