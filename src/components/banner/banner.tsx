@@ -1,45 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import bannerImage from "../../assets/images/banner-img-min.png";
 // import { GoCodeOfConduct } from "react-icons/go";
 // import { MdGraphicEq } from "react-icons/md";
 import OnScrollViewHorizontal from "../atoms/onScrollviewHosrizontal";
 import { FaDotCircle } from "react-icons/fa";
-import { contract } from "../../constants";
-import { useReadContract, useActiveAccount } from "thirdweb/react";
-import { ethers } from "ethers";
-import {
-  prepareContractCall,
-  sendAndConfirmTransaction,
-} from "thirdweb";
 
 const Banner: React.FC = () => {
-  const account = useActiveAccount();
-
-  const { data, isLoading } = useReadContract({
-    contract,
-    method: "function mintPrice() returns (uint256)",
-    params: [],
-  });
-
-  const handleMint = async () => {
-    if (account) {
-      try {
-        const transaction = prepareContractCall({
-          contract,
-          method: "function mintNFT()",
-          params: [],
-          value: data,
-        });
-        await sendAndConfirmTransaction({
-          account,
-          transaction,
-        });
-        window.alert("Successfully Minted");
-      } catch (err: any) {
-        window.alert(err.message);
-      }
-    }
-  };
 
   return (
     <section className="bg-transparent container mx-auto">
@@ -91,25 +57,6 @@ const Banner: React.FC = () => {
               project is to do exactly that, having an ever lasting effect,
               while creating value for everyone involved.
             </p>
-            <div className="mt-6 flex items-center justify-start gap-x-6">
-              <button
-                onClick={() => handleMint()}
-                disabled={account && account.address ? false : true}
-                className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                {account && account.address
-                  ? `Mint for ${
-                      isLoading ? 0 : ethers.formatEther(data || 0)
-                    } MATIC`
-                  : "Connect Wallet to Mint"}
-              </button>
-              <a
-                href="#learnmore"
-                className="text-sm font-semibold leading-6 text-primary"
-              >
-                Learn more <span aria-hidden="true">→</span>
-              </a>
-            </div>
           </div>
         </OnScrollViewHorizontal>
         {/* Right */}

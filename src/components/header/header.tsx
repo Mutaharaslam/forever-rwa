@@ -8,11 +8,15 @@ import { IoClose } from "react-icons/io5";
 import { ConnectButton, lightTheme } from "thirdweb/react";
 
 import { client, chain } from "../../constants";
+import { contract } from "../../constants";
+import { useReadContract, useActiveAccount } from "thirdweb/react";
+import { ethers } from "ethers";
+import { prepareContractCall, sendAndConfirmTransaction } from "thirdweb";
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -51,6 +55,48 @@ const Header: React.FC = () => {
     } else {
       navigate(href);
     }
+  };
+
+  const account = useActiveAccount();
+
+  const { data, isLoading } = useReadContract({
+    contract,
+    method: "function mintPrice() returns (uint256)",
+    params: [],
+  });
+
+  const handleMint = async () => {
+    if (account) {
+      try {
+        const transaction = prepareContractCall({
+          contract,
+          method: "function mintNFT()",
+          params: [],
+          value: data,
+        });
+        await sendAndConfirmTransaction({
+          account,
+          transaction,
+        });
+        window.alert("Successfully Minted");
+      } catch (err: any) {
+        window.alert(err.message);
+      }
+    }
+  };
+  const [count, setCount] = useState(1);
+
+  const handleIncrement = () => {
+    setCount((prevCount) => prevCount + 1);
+  };
+
+  const handleDecrement = () => {
+    setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : 1)); // prevent going below 1
+  };
+
+  const handleChange = (e: any) => {
+    const value = parseInt(e.target.value, 10);
+    setCount(value >= 1 ? value : 1); // make sure the count is at least 1
   };
 
   return (
@@ -109,6 +155,54 @@ const Header: React.FC = () => {
                 ))}
               </>
             )}
+            <div
+              className={`flex items-center rounded-md px-3 mr-6 ${
+                account && account?.address ? "bg-primary" : "transparent pointer-events-none"
+              }`}
+            >
+              <div
+                className={`items-center justify-start gap-2 ${
+                  account && account?.address ? "flex" : "hidden"
+                }`}
+              >
+                <button
+                  onClick={handleDecrement}
+                  // disabled={account && account.address ? false : true}
+                  className="text-xl font-semibold text-white p-2 py-[11px]"
+                >
+                  -
+                </button>
+
+                <input
+                  type="number"
+                  value={count}
+                  onChange={handleChange}
+                  min="1"
+                  className="w-10 text-center border rounded-md"
+                />
+
+                <button
+                  onClick={handleIncrement}
+                  // disabled={account && account.address ? false : true}
+                  className="text-xl font-semibold text-white p-2"
+                >
+                  +
+                </button>
+              </div>
+
+              <button
+                onClick={() => handleMint()} // Pass the count to the mint function
+                disabled={account && account.address ? false : true}
+                className="rounded-md bg-primary disabled:bg-slate-300 disabled:text-slate-100 px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline
+                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                {account && account.address
+                  ? `Mint ${count} for ${
+                      isLoading ? 0 : ethers.formatEther(data || 0)
+                    } MATIC`
+                  : " Mint"}
+              </button>
+            </div>
 
             <ConnectButton
               client={client}
