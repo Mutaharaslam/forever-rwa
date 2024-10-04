@@ -157,7 +157,7 @@ const Header: React.FC = () => {
             )}
             <div
               className={`flex items-center rounded-md px-3 mr-6 ${
-                account && account?.address ? "bg-primary" : "transparent pointer-events-none"
+                account && account?.address ? "bg-primary" : "transparent"
               }`}
             >
               <div
@@ -178,7 +178,7 @@ const Header: React.FC = () => {
                   value={count}
                   onChange={handleChange}
                   min="1"
-                  className="w-10 text-center border rounded-md text-black"
+                  className="w-12 text-center border rounded-md text-black font-sans text-bold"
                 />
 
                 <button
@@ -188,12 +188,14 @@ const Header: React.FC = () => {
                 >
                   +
                 </button>
+
+                <div className="w-[2px] h-8 bg-white"></div>
               </div>
 
               <button
                 onClick={() => handleMint()} // Pass the count to the mint function
                 disabled={account && account.address ? false : true}
-                className="rounded-md bg-primary disabled:bg-slate-300 disabled:text-slate-100 px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline
+                className="rounded-md bg-primary-800 ml-3 disabled:bg-slate-300 disabled:text-slate-100 px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline
                    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 {account && account.address
@@ -303,53 +305,55 @@ const Header: React.FC = () => {
             </span>
           </button> */}
           <div
-              className={`flex items-center rounded-md  ${
-                account && account?.address ? "bg-primary px-3" : "transparent pointer-events-none px-0"
+            className={`flex items-center rounded-md ${
+              account && account?.address ? "bg-primary px-3" : "transparent px-0"
+            }`}
+          >
+            <div
+              className={`items-center justify-start gap-2 ${
+                account && account?.address ? "flex" : "hidden"
               }`}
             >
-              <div
-                className={`items-center justify-start gap-2 ${
-                  account && account?.address ? "flex" : "hidden"
-                }`}
+              <button
+                onClick={handleDecrement}
+                // disabled={account && account.address ? false : true}
+                className="text-xl font-semibold text-white p-2 py-[11px]"
               >
-                <button
-                  onClick={handleDecrement}
-                  // disabled={account && account.address ? false : true}
-                  className="text-xl font-semibold text-white p-2 py-[11px]"
-                >
-                  -
-                </button>
+                -
+              </button>
 
-                <input
-                  type="number"
-                  value={count}
-                  onChange={handleChange}
-                  min="1"
-                  className="w-10 text-center border rounded-md"
-                />
-
-                <button
-                  onClick={handleIncrement}
-                  // disabled={account && account.address ? false : true}
-                  className="text-xl font-semibold text-white p-2"
-                >
-                  +
-                </button>
-              </div>
+              <input
+                type="number"
+                value={count}
+                onChange={handleChange}
+                min="1"
+                className="w-12 text-center border rounded-md text-black font-sans text-bold"
+              />
 
               <button
-                onClick={() => handleMint()} // Pass the count to the mint function
-                disabled={account && account.address ? false : true}
-                className="rounded-md bg-primary disabled:bg-slate-300 disabled:text-slate-100 px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline
-                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={handleIncrement}
+                // disabled={account && account.address ? false : true}
+                className="text-xl font-semibold text-white p-2"
               >
-                {account && account.address
-                  ? `Mint ${count} for ${
-                      isLoading ? 0 : ethers.formatEther(data || 0)
-                    } MATIC`
-                  : " Mint"}
+                +
               </button>
+
+              <div className="w-[2px] h-8 bg-white"></div>
             </div>
+
+            <button
+              onClick={() => handleMint()} // Pass the count to the mint function
+              disabled={account && account.address ? false : true}
+              className="rounded-md bg-primary-800 md:ml-3 disabled:bg-slate-300 disabled:text-slate-100 px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline
+                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              {account && account.address
+                ? `Mint ${count} for ${
+                    isLoading ? 0 : ethers.formatEther(data || 0)
+                  } MATIC`
+                : " Mint"}
+            </button>
+          </div>
           <ConnectButton
             client={client}
             chain={chain}
