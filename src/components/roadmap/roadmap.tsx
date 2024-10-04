@@ -109,8 +109,8 @@ const RoadMap: React.FC = () => {
           ></div>
           <div
             className="absolute md:w-10 md:h-10 h-7 w-7 rounded-full bg-primary-700 text-white text-center
-             flex items-center justify-center font-medium leading-tight font-sans md:text-[9px] text-[7px]
-              left-1/2 transform -translate-x-1/2 md:-translate-y-[28px] -translate-y-[24px]"
+             flex items-center justify-center font-medium leading-tight font-sans md:text-[9px] z-20 text-[7px]
+              left-1/2 transform -translate-x-1/2 md:-translate-y-[20px] -translate-y-[24px]"
             style={{ top: `${progress}%` }} // Position bassed on progressss
           >
             We're Here
