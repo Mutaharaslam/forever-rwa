@@ -156,7 +156,7 @@ const Header: React.FC = () => {
               </>
             )}
             <div
-              className={`flex items-center rounded-md px-3 mr-6 ${
+              className={`flex items-center rounded-md px-3 mr-5 ${
                 account && account?.address ? "bg-primary" : "transparent"
               }`}
             >
