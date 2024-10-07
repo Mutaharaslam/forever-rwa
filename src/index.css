@@ -39,7 +39,7 @@
   --red: #c62132;
   --blue: #2563eb;
   --yellow: #f4c790;
-  --black: #000;
+  --black: rgba(0, 0, 0);
   --white: #fff;
   --base-white: rgb(244, 241, 234);
   --base-black: #0b0a0a;

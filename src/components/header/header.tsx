@@ -12,6 +12,7 @@ import { contract } from "../../constants";
 import { useReadContract, useActiveAccount } from "thirdweb/react";
 import { ethers } from "ethers";
 import { prepareContractCall, sendAndConfirmTransaction } from "thirdweb";
+import Popup from "../popup/popup";
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -56,48 +57,6 @@ const Header: React.FC = () => {
       navigate(href);
     }
   };
-
-  const account = useActiveAccount();
-
-  const { data, isLoading } = useReadContract({
-    contract,
-    method: "function mintPrice() returns (uint256)",
-    params: [],
-  });
-
-  const handleMint = async () => {
-    if (account) {
-      try {
-        const amount = parseFloat(ethers.formatUnits(data || 0, 6)) * count;
-        const tokenAmount = ethers.parseUnits(`${amount}`, 6);
-
-        const transactionA = prepareContractCall({
-          contract: tokenContract,
-          method: "function approve(address spender, uint256 value)",
-          params: [contractAddress, tokenAmount],
-        });
-        await sendAndConfirmTransaction({
-          account,
-          transaction: transactionA,
-        });
-
-        const transaction = prepareContractCall({
-          contract,
-          method: "function mintNFT(uint256 _mintAmount)",
-          params: [ethers.parseUnits(`${count}`, 0)],
-        });
-        await sendAndConfirmTransaction({
-          account,
-          transaction,
-        });
-        window.alert("Successfully Minted");
-      } catch (err: any) {
-        window.alert(err.message);
-      }
-    }
-  };
-  const [count, setCount] = useState(1);
-
   const handleIncrement = () => {
     setCount((prevCount) => prevCount + 1);
   };
@@ -110,6 +69,65 @@ const Header: React.FC = () => {
     const value = parseInt(e.target.value, 10);
     setCount(value >= 1 ? value : 1); // make sure the count is at least 1
   };
+
+  // Minting
+
+  const account = useActiveAccount();
+  const { data, isLoading } = useReadContract({
+    contract,
+    method: "function mintPrice() returns (uint256)",
+    params: [],
+  });
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [status, setStatus] = useState("Approving tokens...");
+
+  const handleMint = async () => {
+    if (account) {
+      setModalOpen(true); // Open modal
+      try {
+        // Step 1: Approving tokens
+        setStatus("Approving tokens...");
+        const amount = parseFloat(ethers.formatUnits(data || 0, 10)) * count;
+        const tokenAmount = ethers.parseUnits(`${amount}`, 6);
+
+        const transactionA = prepareContractCall({
+          contract: tokenContract,
+          method: "function approve(address spender, uint256 value)",
+          params: [contractAddress, tokenAmount],
+        });
+        await sendAndConfirmTransaction({
+          account,
+          transaction: transactionA,
+        });
+
+        // Step 2: Processing transaction
+        setStatus("Processing...");
+
+        // Step 3: Minting
+        setStatus("Minting...");
+        const transaction = prepareContractCall({
+          contract,
+          method: "function mintNFT(uint256 _mintAmount)",
+          params: [ethers.parseUnits(`${count}`, 0)],
+        });
+        await sendAndConfirmTransaction({
+          account,
+          transaction,
+        });
+
+        // Step 4: Success
+        setStatus("Successfully minted!");
+      } catch (err: any) {
+        // Handle error
+        setStatus(`Error: ${err.message}`);
+      } finally {
+        // Close modal after 3 seconds or when the user closes it
+        setTimeout(() => setModalOpen(false), 3000);
+      }
+    }
+  };
+  const [count, setCount] = useState(1);
 
   return (
     <header
@@ -167,8 +185,9 @@ const Header: React.FC = () => {
                 ))}
               </>
             )}
+            {/* minting */}
             <div
-              className={`flex items-center rounded-md px-3 mr-5 ${
+              className={`flex items-center rounded-md px-3 mr-5 py-1.5 min-h-[50px] ${
                 account && account?.address ? "bg-primary" : "transparent"
               }`}
             >
@@ -179,8 +198,7 @@ const Header: React.FC = () => {
               >
                 <button
                   onClick={handleDecrement}
-                  // disabled={account && account.address ? false : true}
-                  className="text-xl font-semibold text-white p-2 py-[11px]"
+                  className="text-2xl bg-primary-950 font-semibold text-white p-2 py-0 hover:bg-primary-700 rounded-md"
                 >
                   -
                 </button>
@@ -190,33 +208,28 @@ const Header: React.FC = () => {
                   value={count}
                   onChange={handleChange}
                   min="1"
-                  className="w-12 text-center border rounded-md text-black font-sans text-bold"
+                  className="w-12 text-center border rounded-md text-primary-950 font-sans text-bold"
                 />
 
                 <button
                   onClick={handleIncrement}
-                  // disabled={account && account.address ? false : true}
-                  className="text-xl font-semibold text-white p-2"
+                  className="text-2xl bg-primary-950 font-semibold text-white p-2 py-0 hover:bg-primary-700 rounded-md"
                 >
                   +
                 </button>
-
-                <div className="w-[2px] h-8 bg-white"></div>
+                <span className="font-sans font-bold text-lg">
+                  {count * parseFloat(ethers.formatUnits(data || 0, 6))}{" "}
+                  <span className="font-normal text-sm">USDT</span>
+                </span>
               </div>
 
               <button
-                onClick={() => handleMint()} // Pass the count to the mint function
+                onClick={() => handleMint()}
                 disabled={account && account.address ? false : true}
-                className="rounded-md bg-primary-800 ml-3 disabled:bg-slate-300 disabled:text-slate-100 px-3 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline
+                className="rounded-md bg-primary-700 ml-3 disabled:bg-slate-300 disabled:text-slate-100 px-3 py-1.5 text-md font-semibold font-sans text-white shadow-sm hover:bg-primary focus-visible:outline
                    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                {account && account.address
-                  ? `Mint ${count} for ${
-                      isLoading
-                        ? 0
-                        : count * parseFloat(ethers.formatUnits(data || 0, 6))
-                    } USDT`
-                  : " Mint"}
+                Mint
               </button>
             </div>
 
@@ -318,8 +331,9 @@ const Header: React.FC = () => {
               {isConnected ? "Mint" : "Connect Wallet"}
             </span>
           </button> */}
+          {/* minting */}
           <div
-            className={`flex items-center rounded-md ${
+            className={`flex items-center rounded-md px-3 mr-5 py-1.5 min-h-[50px] ${
               account && account?.address
                 ? "bg-primary px-3"
                 : "transparent px-0"
@@ -332,7 +346,7 @@ const Header: React.FC = () => {
             >
               <button
                 onClick={handleDecrement}
-                className="text-xl font-semibold text-white p-2 py-[11px]"
+                className="text-2xl bg-primary-950 font-semibold text-white p-2 py-0 hover:bg-primary-700 rounded-md"
               >
                 -
               </button>
@@ -342,31 +356,31 @@ const Header: React.FC = () => {
                 value={count}
                 onChange={handleChange}
                 min="1"
-                className="w-12 text-center border rounded-md text-black font-sans text-bold"
+                className="w-12 text-center border rounded-md text-primary-950 font-sans text-bold"
               />
 
               <button
                 onClick={handleIncrement}
-                className="text-xl font-semibold text-white p-2"
+                className="text-2xl bg-primary-950 font-semibold text-white p-2 py-0 hover:bg-primary-700 rounded-md"
               >
                 +
               </button>
-              <div className="w-[2px] h-8 bg-white"></div>
+              <span className="font-sans font-bold text-lg">
+                {count * parseFloat(ethers.formatUnits(data || 0, 6))}{" "}
+                <span className="font-normal text-sm">USDT</span>
+              </span>
             </div>
 
             <button
-              onClick={() => handleMint()} // Pass the count to the mint function
+              onClick={() => handleMint()}
               disabled={account && account.address ? false : true}
-              className="rounded-md bg-primary-800 ml-3 disabled:bg-slate-300 disabled:text-slate-100 px-3 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline
+              className="rounded-md bg-primary-700 ml-3 disabled:bg-slate-300 disabled:text-slate-100 px-3 py-1.5 text-md font-semibold font-sans text-white shadow-sm hover:bg-primary focus-visible:outline
                    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              {account && account.address
-                ? `Mint ${count} for ${
-                    count * parseFloat(ethers.formatUnits(data || 0, 6))
-                  } MATIC`
-                : " Mint"}
+              Mint
             </button>
           </div>
+
           <ConnectButton
             client={client}
             chain={chain}
@@ -381,6 +395,11 @@ const Header: React.FC = () => {
           />
         </div>
       )}
+      <Popup
+        isOpen={isModalOpen}
+        status={status}
+        onClose={() => setModalOpen(false)}
+      />
     </header>
   );
 };

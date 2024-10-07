@@ -29,9 +29,9 @@ const Footer: React.FC = () => {
           {!isLoading &&
             data &&
             account &&
-            account.address &&
-            account.address &&
-            data.toLowerCase() === account.address.toLowerCase() && (
+            account?.address &&
+            account?.address &&
+            data.toLowerCase() === account?.address?.toLowerCase() && (
               <Link to="/distribute" className="hover:text-secondary-400">
                 Distribute Rewards
               </Link>
