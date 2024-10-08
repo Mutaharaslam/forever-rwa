@@ -1,4 +1,4 @@
-import { createThirdwebClient, getContract } from "thirdweb";
+import { createThirdwebClient, getContract, getGasPrice } from "thirdweb";
 import { polygonAmoy, polygon } from "thirdweb/chains";
 
 export const usdtAddress = "0xd804422A897DE0FCE4c2c4Ea72091f9eCF42c463";
@@ -21,3 +21,9 @@ export const tokenContract = getContract({
   address: usdtAddress,
   chain,
 });
+
+export const getIncreasedGasPrice = async () => {
+  const gasPrice = await getGasPrice({ client, chain });
+  const increasedGasPrice = (gasPrice * BigInt(120)) / BigInt(100);
+  return increasedGasPrice;
+};

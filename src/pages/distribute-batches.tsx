@@ -4,15 +4,11 @@ import {
   contract,
   contractAddress,
   tokenContract,
-  client,
-  chain,
+  getIncreasedGasPrice,
 } from "../constants";
 import { useActiveAccount, useReadContract } from "thirdweb/react";
 import { ethers } from "ethers";
-import {
-  prepareContractCall,
-  sendAndConfirmTransaction,
-} from "thirdweb";
+import { prepareContractCall, sendAndConfirmTransaction } from "thirdweb";
 
 const DistributeBatches: React.FC = () => {
   const account = useActiveAccount();
@@ -47,10 +43,13 @@ const DistributeBatches: React.FC = () => {
       try {
         setSuccessMessage("Processing...");
         const tokenAmount = ethers.parseUnits(totalAwardAmount, 6);
+        const gasPrice = await getIncreasedGasPrice();
+
         const transaction = prepareContractCall({
           contract: tokenContract,
           method: "function approve(address spender, uint256 value)",
           params: [contractAddress, tokenAmount],
+          gasPrice,
         });
         await sendAndConfirmTransaction({
           account,
@@ -61,6 +60,7 @@ const DistributeBatches: React.FC = () => {
           contract,
           method: "function distributeRewards(uint256 rewardAmount)",
           params: [tokenAmount],
+          gasPrice,
         });
         await sendAndConfirmTransaction({
           account,
@@ -102,10 +102,13 @@ const DistributeBatches: React.FC = () => {
       try {
         setBatchSuccessMessage("Processing...");
         const tokenAmount = ethers.parseUnits(totalAmount, 6);
+        const gasPrice = await getIncreasedGasPrice();
+
         const transaction = prepareContractCall({
           contract: tokenContract,
           method: "function approve(address spender, uint256 value)",
           params: [contractAddress, tokenAmount],
+          gasPrice,
         });
         sendAndConfirmTransaction({
           account,
@@ -126,6 +129,7 @@ const DistributeBatches: React.FC = () => {
               ethers.parseUnits(`${i}`, 0),
               ethers.parseUnits(`${Math.min(totalSold, i + increment - 1)}`, 0),
             ],
+            gasPrice,
           });
           await sendAndConfirmTransaction({
             account,
