@@ -7,7 +7,13 @@ import { IoClose } from "react-icons/io5";
 
 import { ConnectButton, lightTheme } from "thirdweb/react";
 
-import { client, chain, tokenContract, contractAddress } from "../../constants";
+import {
+  client,
+  chain,
+  tokenContract,
+  contractAddress,
+  getIncreasedGasPrice,
+} from "../../constants";
 import { contract } from "../../constants";
 import { useReadContract, useActiveAccount } from "thirdweb/react";
 import { ethers } from "ethers";
@@ -88,13 +94,15 @@ const Header: React.FC = () => {
       try {
         // Step 1: Approving tokens
         setStatus("Approving tokens...");
-        const amount = parseFloat(ethers.formatUnits(data || 0, 10)) * count;
+        const amount = parseFloat(ethers.formatUnits(data || 0, 6)) * count;
         const tokenAmount = ethers.parseUnits(`${amount}`, 6);
 
+        const gasPrice = await getIncreasedGasPrice();
         const transactionA = prepareContractCall({
           contract: tokenContract,
           method: "function approve(address spender, uint256 value)",
           params: [contractAddress, tokenAmount],
+          gasPrice,
         });
         await sendAndConfirmTransaction({
           account,
@@ -110,6 +118,7 @@ const Header: React.FC = () => {
           contract,
           method: "function mintNFT(uint256 _mintAmount)",
           params: [ethers.parseUnits(`${count}`, 0)],
+          gasPrice,
         });
         await sendAndConfirmTransaction({
           account,
